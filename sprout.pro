@@ -9,3 +9,6 @@ SOURCES += \
 DISTFILES += \
     README.md
 
+HEADERS += \
+    def.h
+
