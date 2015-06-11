@@ -1,4 +1,3 @@
-#include  "QtCore"
 #include "../def.h"
 
 QTextStream& qStdOut() {
