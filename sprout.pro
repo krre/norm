@@ -1,5 +1,7 @@
 TEMPLATE = lib
 SUBDIRS = app
+QT += core
+CONFIG += c++11
 
 SOURCES += \
     main.cpp
