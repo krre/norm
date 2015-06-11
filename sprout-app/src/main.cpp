@@ -1,3 +1,4 @@
+#include <QTextStream>
 #include "../sprout-lib/src/def.h"
 
 QTextStream& qStdOut() {
