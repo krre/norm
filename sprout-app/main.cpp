@@ -1,7 +1,7 @@
 #include "../def.h"
 
 QTextStream& qStdOut() {
-    static QTextStream ts( stdout );
+    static QTextStream ts(stdout);
     return ts;
 }
 
