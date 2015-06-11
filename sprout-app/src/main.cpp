@@ -1,4 +1,4 @@
-#include "../def.h"
+#include "../sprout-lib/src/def.h"
 
 QTextStream& qStdOut() {
     static QTextStream ts(stdout);
