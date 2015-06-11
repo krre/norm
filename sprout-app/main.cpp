@@ -5,7 +5,12 @@ QTextStream& qStdOut() {
     return ts;
 }
 
-int main() {
-    QString ver = "Sprout " + VERSION;
-    qStdOut() << ver << endl;
+int main(int argc, char *argv[]) {
+    if (argc == 1) {
+        QString ver = "Sprout " + VERSION;
+        qStdOut() << ver << endl;
+    } else {
+        QString sproutPath = argv[1];
+        qStdOut() << sproutPath << endl;
+    }
 }
