@@ -8,10 +8,10 @@ QTextStream& qStdOut() {
 
 int main(int argc, char *argv[]) {
     if (argc == 1) {
-        QString ver = "Sprout " + VERSION;
+        auto ver = "Sprout " + QString(VERSION);
         qStdOut() << ver << endl;
     } else {
-        QString sproutPath = argv[1];
+        auto sproutPath = argv[1];
         qStdOut() << sproutPath << endl;
     }
 }
