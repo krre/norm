@@ -1,2 +1,2 @@
-/build
-*.swp
+# qtcreator generated files
+*.pro.user*

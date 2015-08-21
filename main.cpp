@@ -1,12 +1,10 @@
-#include <string>
-#include <iostream>
+#include <QtCore>
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {
-        std::cout << "Sprout" << std::endl;
-        std::cout << "Usage: sprout [sourcefile]" << std::endl;
-
+        qDebug() << "Sprout";
+        qDebug() << "Usage: sprout [sourcefile]";
     } else {
-        std::string filePath = argv[1];
+        QString filePath = argv[1];
     }
 }
