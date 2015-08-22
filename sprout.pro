@@ -10,3 +10,6 @@ CONFIG +=c++11
 TEMPLATE = app
 
 SOURCES += main.cpp
+
+HEADERS += \
+    global.h
