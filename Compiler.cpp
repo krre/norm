@@ -15,20 +15,22 @@ void Compiler::run()
         auto db = QSqlDatabase::addDatabase("QSQLITE", filePath);
         db.setDatabaseName(filePath);
         if (!db.open()) {
-             qDebug("Error occurred opening the database.");
-             qDebug("%s.", qPrintable(db.lastError().text()));
+             console("Error occurred opening the database.");
+             console(db.lastError().text().toStdString())
              return;
         }
 
         QSqlQuery query(db);
         query.prepare("SELECT * FROM Functions");
         if (!query.exec()) {
-            qDebug("Error occurred querying.");
-            qDebug("%s.", qPrintable(db.lastError().text()));
+            console("Error occurred querying.");
+            console(db.lastError().text().toStdString())
             return;
         }
         while (query.next()) {
-            qDebug() << query.value("name").toString() << query.value("body").toString();
+            console(query.value("name").toString().toStdString() << " "
+                    << query.value("command").toString().toStdString() << " "
+                    << query.value("argument").toString().toStdString())
         }
     } else {
         console("File not exists: " << filePath.toStdString())
