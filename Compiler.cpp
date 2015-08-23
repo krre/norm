@@ -2,6 +2,9 @@
 #include "global.h"
 #include <QFileInfo>
 #include <QtSql>
+#include "llvm/IR/LLVMContext.h"
+#include "llvm/IR/Module.h"
+#include "llvm/IR/IRBuilder.h"
 
 Compiler::Compiler(const QString &filePath): filePath(filePath)
 {
@@ -15,7 +18,7 @@ void Compiler::run()
         auto db = QSqlDatabase::addDatabase("QSQLITE", filePath);
         db.setDatabaseName(filePath);
         if (!db.open()) {
-             console("Error occurred opening the database.");
+             console("Error occurred opening the database");
              console(db.lastError().text().toStdString())
              return;
         }
@@ -23,7 +26,7 @@ void Compiler::run()
         QSqlQuery query(db);
         query.prepare("SELECT * FROM Functions");
         if (!query.exec()) {
-            console("Error occurred querying.");
+            console("Error occurred querying");
             console(db.lastError().text().toStdString())
             return;
         }
@@ -35,6 +38,12 @@ void Compiler::run()
     } else {
         console("File not exists: " << filePath.toStdString())
     }
+
+    llvm::LLVMContext& context = llvm::getGlobalContext();
+    llvm::Module* module = new llvm::Module("top", context);
+    llvm::IRBuilder<> builder(context);
+
+    module->dump();
 }
 
 bool Compiler::isFileExists(const QString &filePath) {
