@@ -1,6 +1,6 @@
 #include <QtCore>
 #include "global.h"
-#include "Compiler.h"
+#include "compiler.h"
 
 int main(int argc, char *argv[]) {
     if (argc != 2) {

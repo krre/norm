@@ -10,12 +10,12 @@ CONFIG += c++11
 TEMPLATE = app
 
 SOURCES += \
-    src/Compiler.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/compiler.cpp
 
 HEADERS += \
-    src/Compiler.h \
-    src/global.h
+    src/global.h \
+    src/compiler.h
 
 INCLUDEPATH += ../LLVM/include
 

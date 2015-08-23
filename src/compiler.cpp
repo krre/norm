@@ -1,4 +1,4 @@
-#include "Compiler.h"
+#include "compiler.h"
 #include "global.h"
 #include <QFileInfo>
 #include <QtSql>
