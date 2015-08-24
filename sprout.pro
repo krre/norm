@@ -21,4 +21,6 @@ INCLUDEPATH += ../LLVM/include
 
 win32: LIBS += "-L../LLVM/lib"
 !win32: LIBS += -L../LLVM/lib
-LIBS += -lLLVMCore -lLLVMSupport -limagehlp
+LIBS += -lLLVMCore -lLLVMSupport
+win32: LIBS += -limagehlp
+!win32: LIBS += -ldl -ltinfo
