@@ -41,10 +41,8 @@ void Compiler::run()
                 llvm::Module* module = new llvm::Module("top", context);
                 llvm::IRBuilder<> builder(context);
 
-                llvm::FunctionType* funcType =
-                    llvm::FunctionType::get(builder.getInt32Ty(), false);
-                llvm::Function* mainFunc =
-                    llvm::Function::Create(funcType, llvm::Function::ExternalLinkage, "main", module);
+                llvm::FunctionType* funcType = llvm::FunctionType::get(builder.getInt32Ty(), false);
+                llvm::Function* mainFunc = llvm::Function::Create(funcType, llvm::Function::ExternalLinkage, "main", module);
 
                 llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
                 builder.SetInsertPoint(entry);
@@ -53,10 +51,9 @@ void Compiler::run()
 
                 std::vector<llvm::Type*> putsArgs;
                 putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
-                llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
+                llvm::ArrayRef<llvm::Type*> argsRef(putsArgs);
 
-                llvm::FunctionType* putsType =
-                  llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
+                llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
                 llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
 
                 builder.CreateCall(putsFunc, printArg);
