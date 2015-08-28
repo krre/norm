@@ -1,6 +1,5 @@
 #include "compiler.h"
 #include "global.h"
-#include <QFileInfo>
 #include <QtSql>
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
