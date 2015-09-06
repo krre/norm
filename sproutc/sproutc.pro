@@ -13,10 +13,12 @@ win32 {
 }
 
 SOURCES += \
-    src/sproutc.cpp
+    src/sproutc.cpp \
+    src/defines.cpp
 
 HEADERS += \
-    src/sproutc.h
+    src/sproutc.h \
+    src/defines.h
 
 INCLUDEPATH += ../../LLVM/include
 

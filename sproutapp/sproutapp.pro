@@ -14,6 +14,11 @@ win32 {
     debug:   DESTDIR = $$OUT_PWD
 }
 
+win32: LIBS += "-L../../sprout/build"
+!win32: LIBS += -L../../sprout/build
+
+LIBS += -lsproutc
+
 SOURCES += \
     src/main.cpp \
 
