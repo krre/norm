@@ -1,5 +1,5 @@
 TEMPLATE = subdirs
-SUBDIRS = sproutapp sproutc sproutdb
+SUBDIRS = sprout-app sprout-c sprout-db
 
 CONFIG += ordered
 
@@ -7,4 +7,4 @@ OTHER_FILES += \
     .gitignore \
     README.md
 
-sproutapp.depends = sproutc sproutdb
+sproutapp.depends = sprout-c sprout-db

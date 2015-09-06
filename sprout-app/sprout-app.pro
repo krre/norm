@@ -19,8 +19,8 @@ win32: LIBS += "-L../../sprout/build"
 
 LIBS += -lsproutc
 
-INCLUDEPATH += ../sproutc/src
-INCLUDEPATH += ../sproutdb/src
+INCLUDEPATH += ../sprout-c/src
+INCLUDEPATH += ../sprout-db/src
 
 SOURCES += \
     src/main.cpp \
