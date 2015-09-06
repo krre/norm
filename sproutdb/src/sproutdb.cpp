@@ -1,0 +1,4 @@
+#include <QtCore>
+
+int main() {
+}

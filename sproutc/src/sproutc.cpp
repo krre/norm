@@ -1,6 +1,4 @@
-#include "compiler.h"
-#include "global.h"
-#include <QtSql>
+#include "sproutc.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
 #include "llvm/IR/IRBuilder.h"
@@ -12,6 +10,7 @@ Compiler::Compiler(const QString& filePath): filePath(filePath)
 
 void Compiler::run()
 {
+    /*
     if (isFileExists(filePath)) {
         console(filePath.toStdString())
         auto db = QSqlDatabase::addDatabase("QSQLITE", filePath);
@@ -64,6 +63,7 @@ void Compiler::run()
     } else {
         console("File not exists: " << filePath.toStdString())
     }
+    */
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
