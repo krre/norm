@@ -1,7 +1,7 @@
 QT += core sql
 QT -= gui
 
-TARGET = ../../sprout/bin/sprout
+TARGET = ../../sprout/build/sprout
 
 CONFIG += console
 CONFIG -= app_bundle

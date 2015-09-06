@@ -1,7 +1,7 @@
 QT += core sql
 QT -= gui
 
-TARGET = ../../sprout/lib/sproutdb
+TARGET = ../../sprout/build/sproutdb
 
 CONFIG += c++11
 

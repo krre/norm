@@ -1,7 +1,7 @@
 QT += core
 QT -= gui
 
-TARGET = ../../sprout/lib/sproutc
+TARGET = ../../sprout/build/sproutc
 
 CONFIG += c++11
 
