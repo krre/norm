@@ -2,9 +2,11 @@
 
 #include <QtCore>
 
-class Defines
+class Defines: public QObject
 {
+    Q_OBJECT
+
 public:
     Defines();
-    static QMap<QString, int> version();
+    Q_INVOKABLE static QVariantMap version();
 };
