@@ -13,7 +13,9 @@ win32 {
 }
 
 SOURCES += \
-    src/sproutdb.cpp
+    src/sproutdb.cpp \
+    src/project.cpp
 
 HEADERS += \
-    src/sproutdb.h
+    src/sproutdb.h \
+    src/project.h
