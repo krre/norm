@@ -1,7 +1,9 @@
 #include "sproutc.h"
+#include "sproutdb.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
 #include "llvm/IR/IRBuilder.h"
+#include <iostream>
 
 Compiler::Compiler(const QString& filePath): filePath(filePath)
 {
@@ -11,17 +13,12 @@ Compiler::Compiler(const QString& filePath): filePath(filePath)
 void Compiler::run()
 {
     if (isFileExists(filePath)) {
-        qDebug() << "Compile finished successfully";
+        SproutDb sproutDb;
+        sproutDb.open(filePath);
+        QVariantList moduleList = sproutDb.readRecords("SELECT * FROM Modules");
+        std::cout << "DEBUG: " << moduleList.count() << std::endl;
+        qDebug() << moduleList;
         /*
-        console(filePath.toStdString())
-        auto db = QSqlDatabase::addDatabase("QSQLITE", filePath);
-        db.setDatabaseName(filePath);
-        if (!db.open()) {
-             console("Error occurred opening the database");
-             console(db.lastError().text().toStdString())
-             return;
-        }
-
         QSqlQuery query(db);
         query.prepare("SELECT * FROM Functions");
         if (!query.exec()) {

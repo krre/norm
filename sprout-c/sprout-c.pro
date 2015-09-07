@@ -1,4 +1,4 @@
-QT += core
+QT += core sql
 QT -= gui
 
 TARGET = ../../sprout/build/sproutc
@@ -20,7 +20,13 @@ HEADERS += \
     src/sproutc.h \
     src/defines.h
 
+INCLUDEPATH += ../sprout-db/src
 INCLUDEPATH += ../../LLVM/include
+
+win32: LIBS += "-L../../sprout/build"
+!win32: LIBS += -L../../sprout/build
+
+LIBS += -lsproutdb
 
 win32: LIBS += "-L../../LLVM/lib"
 !win32: LIBS += -L../../LLVM/lib
