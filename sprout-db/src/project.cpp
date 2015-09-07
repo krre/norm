@@ -38,16 +38,20 @@ void Project::initTables(const QSqlDatabase& db)
                "moduleId INTEGER,"
                "name"
                ")");
-    query.exec("CREATE TABLE Commands("
+    query.exec("CREATE TABLE Instructions("
                "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                "functionId INTEGER,"
                "name"
+               ")");
+    query.exec("CREATE TABLE Arguments("
+               "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+               "instructionId,"
+               "arg"
                ")");
     query.exec("CREATE TABLE Comments("
                "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                "comment"
                ")");
-
 }
 
 void Project::initRecords(const QSqlDatabase& db, const QString& projectName)
