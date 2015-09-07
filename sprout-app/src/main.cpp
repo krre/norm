@@ -1,5 +1,6 @@
 #include <QtCore>
 #include "defines.h"
+#include "sproutc.h"
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
@@ -7,7 +8,9 @@ int main(int argc, char* argv[]) {
         qDebug() << qPrintable(QString("Sprout %1.%2.%3").arg(version["major"]).arg(version["minor"]).arg(version["patch"]));
         qDebug() << "Usage: sprout [sourcefile]";
     } else {
-        qDebug() << argv[1];
+        QString filePath = argv[1];
+        Compiler compiler(filePath);
+        compiler.run();
     }
     return EXIT_SUCCESS;
 }

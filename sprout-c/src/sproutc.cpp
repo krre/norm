@@ -10,8 +10,9 @@ Compiler::Compiler(const QString& filePath): filePath(filePath)
 
 void Compiler::run()
 {
-    /*
     if (isFileExists(filePath)) {
+        qDebug() << "Compile finished successfully";
+        /*
         console(filePath.toStdString())
         auto db = QSqlDatabase::addDatabase("QSQLITE", filePath);
         db.setDatabaseName(filePath);
@@ -59,11 +60,10 @@ void Compiler::run()
 
                 module->dump();
             }
-        }
+        }*/
     } else {
-        console("File not exists: " << filePath.toStdString())
+        qDebug() << "File not exists: " << filePath;
     }
-    */
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
