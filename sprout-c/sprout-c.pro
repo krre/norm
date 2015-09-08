@@ -18,7 +18,8 @@ SOURCES += \
 
 HEADERS += \
     src/sproutc.h \
-    src/defines.h
+    src/defines.h \
+    src/macro.h
 
 INCLUDEPATH += ../sprout-db/src
 INCLUDEPATH += ../../LLVM/include

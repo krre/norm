@@ -3,7 +3,7 @@
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
 #include "llvm/IR/IRBuilder.h"
-#include <iostream>
+#include "macro.h"
 
 Compiler::Compiler(const QString& filePath): filePath(filePath)
 {
@@ -57,7 +57,7 @@ void Compiler::run()
         module->dump();
 
     } else {
-        qDebug() << "File not exists: " << filePath;
+        console("File not exists: " << filePath.toStdString());
     }
 }
 
