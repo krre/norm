@@ -1,8 +1,9 @@
 TEMPLATE = subdirs
-SUBDIRS = sprout-c sprout-db sprout-app
+SUBDIRS = sprout-db sprout-c sprout-app
 
-sprout-app.depends = sprout-c
+sprout-c.depends = sprout-db
 sprout-app.depends = sprout-db
+sprout-app.depends = sprout-c
 
 OTHER_FILES += \
     .gitignore \
