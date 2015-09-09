@@ -13,7 +13,8 @@
 #include "llvm/Support/ToolOutputFile.h"
 #include "llvm/Support/FormattedStream.h"
 #include "llvm/Support/Host.h"
-#include "llvm/PassManager.h"
+#include "llvm/Support/FileSystem.h"
+#include "llvm/IR/LegacyPassManager.h"
 
 Compiler::Compiler(const QString& filePath): filePath(filePath)
 {
@@ -73,7 +74,7 @@ void Compiler::run()
         llvm::InitializeAllAsmPrinters();
         llvm::InitializeAllAsmParsers();
 
-        llvm::PassManager PM;
+        llvm::legacy::PassManager PM;
 
         llvm::TargetOptions Options;
 
@@ -90,15 +91,13 @@ void Compiler::run()
         llvm::TargetMachine * machineTarget =
             TheTarget->createTargetMachine(TheTriple.getTriple(), MCPU, FeaturesStr, Options);
 
-        // Figure out where we are going to send the output...
-        QString outobjname = "/home/krre/work/sprout/proj.o";
+        QString outobjname = filePath.replace(".sprout", ".o");
+        qDebug() << outobjname;
 
-//        QSharedPointer<llvm::tool_output_file> Out(new llvm::tool_output_file(outobjname.toStdString(), Err, llvm::sys::fs::OpenFlags::F_RW));
-        auto Out = new llvm::tool_output_file(outobjname.toStdString(), 1);
+        std::error_code EC;
+        llvm::raw_fd_ostream OS(outobjname.toStdString(), EC, llvm::sys::fs::F_None);
 
-        llvm::formatted_raw_ostream FOS(Out->os());
-
-        if (machineTarget->addPassesToEmitFile(PM, FOS, llvm::TargetMachine::CGFT_ObjectFile,true)) {
+        if (machineTarget->addPassesToEmitFile(PM, OS, llvm::TargetMachine::CGFT_ObjectFile, false)) {
             std::cerr << " target does not support generation of this file type!\n";
             return;
         }
