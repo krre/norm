@@ -1,9 +1,19 @@
 #include "sproutc.h"
 #include "sproutdb.h"
+#include "macro.h"
+
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
 #include "llvm/IR/IRBuilder.h"
-#include "macro.h"
+
+#include "llvm/InitializePasses.h"
+#include "llvm/LinkAllPasses.h"
+#include "llvm/Support/TargetSelect.h"
+#include "llvm/Support/TargetRegistry.h"
+#include "llvm/Support/ToolOutputFile.h"
+#include "llvm/Support/FormattedStream.h"
+#include "llvm/Support/Host.h"
+#include "llvm/PassManager.h"
 
 Compiler::Compiler(const QString& filePath): filePath(filePath)
 {
@@ -55,6 +65,45 @@ void Compiler::run()
         builder.CreateRetVoid();
 
         module->dump();
+
+        // generate output file
+
+        llvm::InitializeAllTargets();
+        llvm::InitializeAllTargetMCs();
+        llvm::InitializeAllAsmPrinters();
+        llvm::InitializeAllAsmParsers();
+
+        llvm::PassManager PM;
+
+        llvm::TargetOptions Options;
+
+        std::string Err;
+
+        llvm::Triple TheTriple(module->getTargetTriple());
+        if (TheTriple.getTriple().empty())
+            TheTriple.setTriple(llvm::sys::getDefaultTargetTriple());
+
+        const llvm::Target* TheTarget = llvm::TargetRegistry::lookupTarget(TheTriple.getTriple(), Err);
+
+        std::string MCPU,FeaturesStr;
+
+        llvm::TargetMachine * machineTarget =
+            TheTarget->createTargetMachine(TheTriple.getTriple(), MCPU, FeaturesStr, Options);
+
+        // Figure out where we are going to send the output...
+        QString outobjname = "/home/krre/work/sprout/proj.o";
+
+//        QSharedPointer<llvm::tool_output_file> Out(new llvm::tool_output_file(outobjname.toStdString(), Err, llvm::sys::fs::OpenFlags::F_RW));
+        auto Out = new llvm::tool_output_file(outobjname.toStdString(), 1);
+
+        llvm::formatted_raw_ostream FOS(Out->os());
+
+        if (machineTarget->addPassesToEmitFile(PM, FOS, llvm::TargetMachine::CGFT_ObjectFile,true)) {
+            std::cerr << " target does not support generation of this file type!\n";
+            return;
+        }
+
+        PM.run(*module);
 
     } else {
         console("File not exists: " << filePath.toStdString());
