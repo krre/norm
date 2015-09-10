@@ -24,6 +24,7 @@ Compiler::Compiler(const QString& filePath): filePath(filePath)
 void Compiler::run()
 {
     if (isFileExists(filePath)) {
+
         SproutDb sproutDb;
         sproutDb.open(filePath);
         QVariantList functionList = sproutDb.readRecords("SELECT * FROM Functions WHERE name='main'");
@@ -51,7 +52,7 @@ void Compiler::run()
 
         if (instruction == "print") {
 
-            llvm::Value* printArg = builder.CreateGlobalStringPtr(argument.toStdString() + "\n");
+//            llvm::Value* printArg = builder.CreateGlobalStringPtr(argument.toStdString() + "\n");
 
             std::vector<llvm::Type*> putsArgs;
             putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
@@ -60,10 +61,10 @@ void Compiler::run()
             llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
             llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
 
-            builder.CreateCall(putsFunc, printArg);
+//            builder.CreateCall(putsFunc, printArg);
         }
 
-        builder.CreateRetVoid();
+        builder.CreateRet(llvm::ConstantInt::get(context, llvm::APInt(32, 0)));
 
         module->dump();
 
