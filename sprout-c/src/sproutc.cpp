@@ -51,17 +51,15 @@ void Compiler::run()
         builder.SetInsertPoint(entry);
 
         if (instruction == "print") {
-
-//            llvm::Value* printArg = builder.CreateGlobalStringPtr(argument.toStdString() + "\n");
+            llvm::Value* printArg = llvm::ConstantDataArray::getString(context, argument.toStdString());
 
             std::vector<llvm::Type*> putsArgs;
             putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
             llvm::ArrayRef<llvm::Type*> argsRef(putsArgs);
-
             llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
             llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
 
-//            builder.CreateCall(putsFunc, printArg);
+            builder.CreateCall(putsFunc, printArg);
         }
 
         builder.CreateRet(llvm::ConstantInt::get(context, llvm::APInt(32, 0)));
