@@ -47,15 +47,6 @@ void Compiler::run()
     llvm::Module* module = new llvm::Module("top", context);
     llvm::IRBuilder<> builder(context);
 
-    // print function prototype
-
-    llvm::Value* printArg = llvm::ConstantDataArray::getString(context, argument.toStdString());
-    std::vector<llvm::Type*> printArgTypes;
-    printArgTypes.push_back(printArg->getType());
-
-    llvm::FunctionType* printType = llvm::FunctionType::get(llvm::Type::getInt32Ty(context), printArgTypes, true);
-    llvm::Function *printFunc = llvm::Function::Create(printType, llvm::Function::ExternalLinkage, llvm::Twine("printf"), module);
-    printFunc->setCallingConv(llvm::CallingConv::C);
 
     // main func prototype
 
@@ -68,12 +59,24 @@ void Compiler::run()
     llvm::BasicBlock *block = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
     builder.SetInsertPoint(block);
 
-    builder.CreateCall(printFunc, printArg);
+    if (instruction == "print") {
+        // print function prototype
+
+        llvm::Value* printArg = llvm::ConstantDataArray::getString(context, argument.toStdString());
+        std::vector<llvm::Type*> printArgTypes;
+        printArgTypes.push_back(printArg->getType());
+
+        llvm::FunctionType* printType = llvm::FunctionType::get(llvm::Type::getInt32Ty(context), printArgTypes, true);
+        llvm::Function *printFunc = llvm::Function::Create(printType, llvm::Function::ExternalLinkage, llvm::Twine("printf"), module);
+        printFunc->setCallingConv(llvm::CallingConv::C);
+
+        builder.CreateCall(printFunc, printArg);
+    }
 
     builder.CreateRet(llvm::ConstantInt::get(context, llvm::APInt(32, 0)));
 
     module->dump();
-
+/*
     // generate output file
 
     llvm::InitializeAllTargets();
@@ -111,6 +114,7 @@ void Compiler::run()
     }
 
     pm.run(*module);
+    */
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
