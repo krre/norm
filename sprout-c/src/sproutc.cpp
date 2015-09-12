@@ -82,16 +82,16 @@ void Compiler::run()
 
     std::string Err;
 
-    llvm::Triple TheTriple(module->getTargetTriple());
-    if (TheTriple.getTriple().empty())
-        TheTriple.setTriple(llvm::sys::getDefaultTargetTriple());
+    llvm::Triple triple(module->getTargetTriple());
+    if (triple.getTriple().empty())
+        triple.setTriple(llvm::sys::getDefaultTargetTriple());
 
-    const llvm::Target* TheTarget = llvm::TargetRegistry::lookupTarget(TheTriple.getTriple(), Err);
+    const llvm::Target* target = llvm::TargetRegistry::lookupTarget(triple.getTriple(), Err);
 
     std::string MCPU,FeaturesStr;
 
     llvm::TargetMachine * machineTarget =
-        TheTarget->createTargetMachine(TheTriple.getTriple(), MCPU, FeaturesStr, Options);
+        target->createTargetMachine(triple.getTriple(), MCPU, FeaturesStr, Options);
 
     QString outobjname = filePath.replace(".sprout", ".o");
     qDebug() << outobjname;
