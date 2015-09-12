@@ -76,35 +76,36 @@ void Compiler::run()
     llvm::InitializeAllAsmPrinters();
     llvm::InitializeAllAsmParsers();
 
-    llvm::legacy::PassManager PM;
+    llvm::legacy::PassManager pm;
 
-    llvm::TargetOptions Options;
+    llvm::TargetOptions options;
 
-    std::string Err;
+    std::string err;
 
     llvm::Triple triple(module->getTargetTriple());
-    if (triple.getTriple().empty())
+
+    if (triple.getTriple().empty()) {
         triple.setTriple(llvm::sys::getDefaultTargetTriple());
+    }
 
-    const llvm::Target* target = llvm::TargetRegistry::lookupTarget(triple.getTriple(), Err);
+    const llvm::Target* target = llvm::TargetRegistry::lookupTarget(triple.getTriple(), err);
 
-    std::string MCPU,FeaturesStr;
+    std::string mcpu, featuresStr;
 
-    llvm::TargetMachine * machineTarget =
-        target->createTargetMachine(triple.getTriple(), MCPU, FeaturesStr, Options);
+    llvm::TargetMachine* machineTarget = target->createTargetMachine(triple.getTriple(), mcpu, featuresStr, options);
 
-    QString outobjname = filePath.replace(".sprout", ".o");
-    qDebug() << outobjname;
+    QString objPath = filePath.replace(".sprout", ".o");
+    qDebug() << objPath;
 
-    std::error_code EC;
-    llvm::raw_fd_ostream OS(outobjname.toStdString(), EC, llvm::sys::fs::F_None);
+    std::error_code ec;
+    llvm::raw_fd_ostream os(objPath.toStdString(), ec, llvm::sys::fs::F_None);
 
-    if (machineTarget->addPassesToEmitFile(PM, OS, llvm::TargetMachine::CGFT_ObjectFile, false)) {
+    if (machineTarget->addPassesToEmitFile(pm, os, llvm::TargetMachine::CGFT_ObjectFile, false)) {
         std::cerr << " target does not support generation of this file type!\n";
         return;
     }
 
-    PM.run(*module);
+    pm.run(*module);
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
