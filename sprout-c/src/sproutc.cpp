@@ -16,6 +16,10 @@
 #include "llvm/Support/FileSystem.h"
 #include "llvm/IR/LegacyPassManager.h"
 
+#include <llvm/ExecutionEngine/ExecutionEngine.h>
+#include <llvm/ExecutionEngine/GenericValue.h>
+#include <llvm/ExecutionEngine/MCJIT.h>
+
 Compiler::Compiler(const QString& filePath): filePath(filePath)
 {
 
@@ -44,7 +48,8 @@ void Compiler::run()
 //        qDebug() << argument;
 
     llvm::LLVMContext& context = llvm::getGlobalContext();
-    llvm::Module* module = new llvm::Module("top", context);
+    std::unique_ptr<llvm::Module> modulePtr = llvm::make_unique<llvm::Module>("top", context);
+    llvm::Module *module = modulePtr.get();
     llvm::IRBuilder<> builder(context);
 
 
@@ -76,7 +81,20 @@ void Compiler::run()
     builder.CreateRet(llvm::ConstantInt::get(context, llvm::APInt(32, 0)));
 
     module->dump();
+
 /*
+    // execute program
+
+    llvm::InitializeNativeTarget();
+    llvm::InitializeNativeTargetAsmPrinter();
+    llvm::InitializeNativeTargetAsmParser();
+
+    llvm::ExecutionEngine* engine = llvm::EngineBuilder(std::move(modulePtr)).create();
+    engine->finalizeObject(); // memory for generated code marked executable:
+                              // http://lists.cs.uiuc.edu/pipermail/llvmdev/2013-June/062677.html
+    engine->runFunction(mainFunc, std::vector<llvm::GenericValue>());
+*/
+
     // generate output file
 
     llvm::InitializeAllTargets();
@@ -114,7 +132,6 @@ void Compiler::run()
     }
 
     pm.run(*module);
-    */
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
