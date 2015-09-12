@@ -47,23 +47,28 @@ void Compiler::run()
     llvm::Module* module = new llvm::Module("top", context);
     llvm::IRBuilder<> builder(context);
 
-    llvm::FunctionType* funcType = llvm::FunctionType::get(builder.getInt32Ty(), false);
-    llvm::Function* mainFunc = llvm::Function::Create(funcType, llvm::Function::ExternalLinkage, "main", module);
+    // print function prototype
 
-    llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
-    builder.SetInsertPoint(entry);
+    llvm::Value* printArg = llvm::ConstantDataArray::getString(context, argument.toStdString());
+    std::vector<llvm::Type*> printArgTypes;
+    printArgTypes.push_back(printArg->getType());
 
-    if (instruction == "print") {
-        llvm::Value* printArg = llvm::ConstantDataArray::getString(context, argument.toStdString());
+    llvm::FunctionType* printType = llvm::FunctionType::get(llvm::Type::getInt32Ty(context), printArgTypes, true);
+    llvm::Function *printFunc = llvm::Function::Create(printType, llvm::Function::ExternalLinkage, llvm::Twine("printf"), module);
+    printFunc->setCallingConv(llvm::CallingConv::C);
 
-        std::vector<llvm::Type*> putsArgs;
-        putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
-        llvm::ArrayRef<llvm::Type*> argsRef(putsArgs);
-        llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
-        llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
+    // main func prototype
 
-        builder.CreateCall(putsFunc, printArg);
-    }
+    std::vector<llvm::Type*> mainArgTypes;
+
+    llvm::FunctionType* mainType = llvm::FunctionType::get(llvm::Type::getInt32Ty(context), mainArgTypes, false);
+    llvm::Function *mainFunc = llvm::Function::Create(mainType, llvm::Function::ExternalLinkage, llvm::Twine("main"), module);
+    mainFunc->setCallingConv(llvm::CallingConv::C);
+
+    llvm::BasicBlock *block = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
+    builder.SetInsertPoint(block);
+
+    builder.CreateCall(printFunc, printArg);
 
     builder.CreateRet(llvm::ConstantInt::get(context, llvm::APInt(32, 0)));
 
