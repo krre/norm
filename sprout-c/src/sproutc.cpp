@@ -5,6 +5,7 @@
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
 #include "llvm/IR/IRBuilder.h"
+#include "llvm/IR/Verifier.h"
 
 #include "llvm/InitializePasses.h"
 #include "llvm/LinkAllPasses.h"
@@ -49,7 +50,7 @@ void Compiler::run()
 
     llvm::LLVMContext& context = llvm::getGlobalContext();
     std::unique_ptr<llvm::Module> modulePtr = llvm::make_unique<llvm::Module>("top", context);
-    llvm::Module *module = modulePtr.get();
+    llvm::Module* module = modulePtr.get();
     llvm::IRBuilder<> builder(context);
 
 
@@ -58,11 +59,13 @@ void Compiler::run()
     std::vector<llvm::Type*> mainArgTypes;
 
     llvm::FunctionType* mainType = llvm::FunctionType::get(llvm::Type::getInt32Ty(context), mainArgTypes, false);
-    llvm::Function *mainFunc = llvm::Function::Create(mainType, llvm::Function::ExternalLinkage, llvm::Twine("main"), module);
+    llvm::Function* mainFunc = llvm::Function::Create(mainType, llvm::Function::ExternalLinkage, llvm::Twine("main"), module);
     mainFunc->setCallingConv(llvm::CallingConv::C);
 
-    llvm::BasicBlock *block = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
+    llvm::BasicBlock* block = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
     builder.SetInsertPoint(block);
+
+    llvm::verifyFunction(*mainFunc);
 
     if (instruction == "print") {
         // print function prototype
@@ -72,10 +75,12 @@ void Compiler::run()
         printArgTypes.push_back(printArg->getType());
 
         llvm::FunctionType* printType = llvm::FunctionType::get(llvm::Type::getInt32Ty(context), printArgTypes, true);
-        llvm::Function *printFunc = llvm::Function::Create(printType, llvm::Function::ExternalLinkage, llvm::Twine("printf"), module);
+        llvm::Function* printFunc = llvm::Function::Create(printType, llvm::Function::ExternalLinkage, llvm::Twine("printf"), module);
         printFunc->setCallingConv(llvm::CallingConv::C);
 
         builder.CreateCall(printFunc, printArg);
+
+        llvm::verifyFunction(*printFunc);
     }
 
     builder.CreateRet(llvm::ConstantInt::get(context, llvm::APInt(32, 0)));
