@@ -7,14 +7,14 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Verifier.h"
 
-//#include "llvm/InitializePasses.h"
-//#include "llvm/LinkAllPasses.h"
+#include "llvm/InitializePasses.h"
+#include "llvm/LinkAllPasses.h"
 #include "llvm/Support/TargetSelect.h"
-//#include "llvm/Support/TargetRegistry.h"
-//#include "llvm/Support/ToolOutputFile.h"
-//#include "llvm/Support/FormattedStream.h"
-//#include "llvm/Support/Host.h"
-//#include "llvm/Support/FileSystem.h"
+#include "llvm/Support/TargetRegistry.h"
+#include "llvm/Support/ToolOutputFile.h"
+#include "llvm/Support/FormattedStream.h"
+#include "llvm/Support/Host.h"
+#include "llvm/Support/FileSystem.h"
 #include "llvm/IR/LegacyPassManager.h"
 
 #include <llvm/ExecutionEngine/ExecutionEngine.h>
@@ -64,7 +64,7 @@ void Compiler::run()
 
          // 'print' function prototype
 
-         auto printArg = builder.CreateGlobalString(QString(argument + "\n").toStdString());
+         auto printArg = builder.CreateGlobalStringPtr(QString(argument).toStdString());
 
          std::vector<llvm::Type*> putsArgs;
          putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
@@ -77,7 +77,7 @@ void Compiler::run()
      }
 
      builder.CreateRetVoid();
-//     module->dump();
+     module->dump();
 
     // execute program
 
@@ -85,11 +85,11 @@ void Compiler::run()
     llvm::InitializeNativeTargetAsmPrinter();
     llvm::InitializeNativeTargetAsmParser();
 
-    llvm::ExecutionEngine* engine = llvm::EngineBuilder(std::move(modulePtr)).create();
-    engine->finalizeObject(); // memory for generated code marked executable:
+//    llvm::ExecutionEngine* engine = llvm::EngineBuilder(std::move(modulePtr)).create();
+//    engine->finalizeObject(); // memory for generated code marked executable:
                               // http://lists.cs.uiuc.edu/pipermail/llvmdev/2013-June/062677.html
-    engine->runFunction(mainFunc, std::vector<llvm::GenericValue>());
-/*
+//    engine->runFunction(mainFunc, std::vector<llvm::GenericValue>());
+
     // generate output file
 
     llvm::InitializeAllTargets();
@@ -116,18 +116,24 @@ void Compiler::run()
     llvm::TargetMachine* machineTarget = target->createTargetMachine(triple.getTriple(), mcpu, featuresStr, options);
 
     QString objPath = filePath.replace(".sprout", ".o");
-    qDebug() << objPath;
+//    qDebug() << objPath;
 
     std::error_code ec;
     llvm::raw_fd_ostream os(objPath.toStdString(), ec, llvm::sys::fs::F_None);
+    llvm::formatted_raw_ostream fos(os);
 
-    if (machineTarget->addPassesToEmitFile(pm, os, llvm::TargetMachine::CGFT_ObjectFile, false)) {
+    if (machineTarget->addPassesToEmitFile(pm, fos, llvm::TargetMachine::CGFT_ObjectFile, false)) {
         std::cerr << " target does not support generation of this file type!\n";
         return;
     }
 
-    pm.run(*module);
-    */
+    bool result = pm.run(*module);
+    if (result) {
+        QProcess* process = new QProcess();
+        QString binPath = objPath;
+        binPath.replace(".o", "");
+        process->start(QString("gcc %1 -o %2").arg(objPath).arg(binPath));
+    }
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
