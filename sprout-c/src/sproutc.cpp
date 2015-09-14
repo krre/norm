@@ -9,17 +9,17 @@
 
 //#include "llvm/InitializePasses.h"
 //#include "llvm/LinkAllPasses.h"
-//#include "llvm/Support/TargetSelect.h"
+#include "llvm/Support/TargetSelect.h"
 //#include "llvm/Support/TargetRegistry.h"
 //#include "llvm/Support/ToolOutputFile.h"
 //#include "llvm/Support/FormattedStream.h"
 //#include "llvm/Support/Host.h"
 //#include "llvm/Support/FileSystem.h"
-//#include "llvm/IR/LegacyPassManager.h"
+#include "llvm/IR/LegacyPassManager.h"
 
 #include <llvm/ExecutionEngine/ExecutionEngine.h>
 #include <llvm/ExecutionEngine/GenericValue.h>
-//#include <llvm/ExecutionEngine/MCJIT.h>
+#include <llvm/ExecutionEngine/MCJIT.h>
 
 Compiler::Compiler(const QString& filePath): filePath(filePath)
 {
@@ -53,45 +53,37 @@ void Compiler::run()
     llvm::Module* module = modulePtr.get();
     llvm::IRBuilder<> builder(context);
 
+    // 'main' func prototype
 
-    // main func prototype
+     llvm::FunctionType* mainType = llvm::FunctionType::get(builder.getVoidTy(), false);
+     llvm::Function* mainFunc = llvm::Function::Create(mainType, llvm::Function::ExternalLinkage, "main", module);
+     llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
+     builder.SetInsertPoint(entry);
 
-    std::vector<llvm::Type*> mainArgTypes;
+     if (instruction == "print") {
 
-    llvm::FunctionType* mainType = llvm::FunctionType::get(llvm::Type::getInt32Ty(context), mainArgTypes, false);
-    llvm::Function* mainFunc = llvm::Function::Create(mainType, llvm::Function::ExternalLinkage, llvm::Twine("main"), module);
-    mainFunc->setCallingConv(llvm::CallingConv::C);
+         // 'print' function prototype
 
-    llvm::BasicBlock* block = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
-    builder.SetInsertPoint(block);
+         auto printArg = builder.CreateGlobalString(QString(argument + "\n").toStdString());
 
-    llvm::verifyFunction(*mainFunc);
+         std::vector<llvm::Type*> putsArgs;
+         putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
+         llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
 
-    if (instruction == "print") {
-        // print function prototype
+         llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
+         llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
 
-        llvm::Value* printArg = llvm::ConstantDataArray::getString(context, argument.toStdString());
-        std::vector<llvm::Type*> printArgTypes;
-        printArgTypes.push_back(printArg->getType());
+         builder.CreateCall(putsFunc, printArg);
+     }
 
-        llvm::FunctionType* printType = llvm::FunctionType::get(llvm::Type::getInt32Ty(context), printArgTypes, true);
-        llvm::Function* printFunc = llvm::Function::Create(printType, llvm::Function::ExternalLinkage, llvm::Twine("printf"), module);
-        printFunc->setCallingConv(llvm::CallingConv::C);
-
-        builder.CreateCall(printFunc, printArg);
-
-        llvm::verifyFunction(*printFunc);
-    }
-
-    builder.CreateRet(llvm::ConstantInt::get(context, llvm::APInt(32, 0)));
-
-    module->dump();
+     builder.CreateRetVoid();
+//     module->dump();
 
     // execute program
 
-//    llvm::InitializeNativeTarget();
-//    llvm::InitializeNativeTargetAsmPrinter();
-//    llvm::InitializeNativeTargetAsmParser();
+    llvm::InitializeNativeTarget();
+    llvm::InitializeNativeTargetAsmPrinter();
+    llvm::InitializeNativeTargetAsmParser();
 
     llvm::ExecutionEngine* engine = llvm::EngineBuilder(std::move(modulePtr)).create();
     engine->finalizeObject(); // memory for generated code marked executable:
