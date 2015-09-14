@@ -7,19 +7,19 @@
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/Verifier.h"
 
-#include "llvm/InitializePasses.h"
-#include "llvm/LinkAllPasses.h"
-#include "llvm/Support/TargetSelect.h"
-#include "llvm/Support/TargetRegistry.h"
-#include "llvm/Support/ToolOutputFile.h"
-#include "llvm/Support/FormattedStream.h"
-#include "llvm/Support/Host.h"
-#include "llvm/Support/FileSystem.h"
-#include "llvm/IR/LegacyPassManager.h"
+//#include "llvm/InitializePasses.h"
+//#include "llvm/LinkAllPasses.h"
+//#include "llvm/Support/TargetSelect.h"
+//#include "llvm/Support/TargetRegistry.h"
+//#include "llvm/Support/ToolOutputFile.h"
+//#include "llvm/Support/FormattedStream.h"
+//#include "llvm/Support/Host.h"
+//#include "llvm/Support/FileSystem.h"
+//#include "llvm/IR/LegacyPassManager.h"
 
 #include <llvm/ExecutionEngine/ExecutionEngine.h>
 #include <llvm/ExecutionEngine/GenericValue.h>
-#include <llvm/ExecutionEngine/MCJIT.h>
+//#include <llvm/ExecutionEngine/MCJIT.h>
 
 Compiler::Compiler(const QString& filePath): filePath(filePath)
 {
@@ -89,9 +89,9 @@ void Compiler::run()
 
     // execute program
 
-    llvm::InitializeNativeTarget();
-    llvm::InitializeNativeTargetAsmPrinter();
-    llvm::InitializeNativeTargetAsmParser();
+//    llvm::InitializeNativeTarget();
+//    llvm::InitializeNativeTargetAsmPrinter();
+//    llvm::InitializeNativeTargetAsmParser();
 
     llvm::ExecutionEngine* engine = llvm::EngineBuilder(std::move(modulePtr)).create();
     engine->finalizeObject(); // memory for generated code marked executable:
