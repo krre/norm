@@ -87,7 +87,6 @@ void Compiler::run()
 
     module->dump();
 
-/*
     // execute program
 
     llvm::InitializeNativeTarget();
@@ -98,8 +97,7 @@ void Compiler::run()
     engine->finalizeObject(); // memory for generated code marked executable:
                               // http://lists.cs.uiuc.edu/pipermail/llvmdev/2013-June/062677.html
     engine->runFunction(mainFunc, std::vector<llvm::GenericValue>());
-*/
-
+/*
     // generate output file
 
     llvm::InitializeAllTargets();
@@ -137,6 +135,7 @@ void Compiler::run()
     }
 
     pm.run(*module);
+    */
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
