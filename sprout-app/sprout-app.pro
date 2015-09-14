@@ -17,7 +17,7 @@ win32 {
 win32: LIBS += "-L../../sprout/build"
 !win32: LIBS += -L../../sprout/build
 
-LIBS += -lsproutc
+LIBS += -lsproutc -lsproutdb
 
 INCLUDEPATH += ../sprout-c/src
 INCLUDEPATH += ../sprout-db/src
