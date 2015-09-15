@@ -26,7 +26,7 @@ Compiler::Compiler(const QString& filePath): filePath(filePath)
 
 }
 
-void Compiler::run(bool isDump, bool isExecute, bool isEmitFile)
+void Compiler::run(bool isDump, bool isExecute)
 {
     if (!isFileExists(filePath)) {
         console("File not exists: " << filePath.toStdString());
@@ -91,9 +91,7 @@ void Compiler::run(bool isDump, bool isExecute, bool isEmitFile)
         engine->finalizeObject(); // memory for generated code marked executable:
                                   // http://lists.cs.uiuc.edu/pipermail/llvmdev/2013-June/062677.html
         engine->runFunction(mainFunc, std::vector<llvm::GenericValue>());
-    }
-
-    if (isEmitFile) {
+    } else {
         llvm::InitializeAllTargets();
         llvm::InitializeAllTargetMCs();
         llvm::InitializeAllAsmPrinters();
