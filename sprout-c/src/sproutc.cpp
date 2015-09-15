@@ -60,7 +60,7 @@ void Compiler::run(bool isDump, bool isExecute)
      llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
      builder.SetInsertPoint(entry);
 
-     if (instruction == "print") {
+     if (instruction == "print-line") {
 
          // 'print' function prototype
 
