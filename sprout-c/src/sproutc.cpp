@@ -26,7 +26,7 @@ Compiler::Compiler(const QString& filePath): filePath(filePath)
 
 }
 
-void Compiler::run(bool isDump)
+void Compiler::run(bool isDump, bool isExecute)
 {
     if (!isFileExists(filePath)) {
         console("File not exists: " << filePath.toStdString());
@@ -82,16 +82,16 @@ void Compiler::run(bool isDump)
         module->dump();
      }
 
-    // execute program
+    if (isExecute) {
+        llvm::InitializeNativeTarget();
+        llvm::InitializeNativeTargetAsmPrinter();
+        llvm::InitializeNativeTargetAsmParser();
 
-    llvm::InitializeNativeTarget();
-    llvm::InitializeNativeTargetAsmPrinter();
-    llvm::InitializeNativeTargetAsmParser();
-
-//    llvm::ExecutionEngine* engine = llvm::EngineBuilder(std::move(modulePtr)).create();
-//    engine->finalizeObject(); // memory for generated code marked executable:
-                              // http://lists.cs.uiuc.edu/pipermail/llvmdev/2013-June/062677.html
-//    engine->runFunction(mainFunc, std::vector<llvm::GenericValue>());
+        llvm::ExecutionEngine* engine = llvm::EngineBuilder(std::move(modulePtr)).create();
+        engine->finalizeObject(); // memory for generated code marked executable:
+                                  // http://lists.cs.uiuc.edu/pipermail/llvmdev/2013-June/062677.html
+        engine->runFunction(mainFunc, std::vector<llvm::GenericValue>());
+    }
 
     // generate output file
 
