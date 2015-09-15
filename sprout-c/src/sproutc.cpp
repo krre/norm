@@ -26,7 +26,7 @@ Compiler::Compiler(const QString& filePath): filePath(filePath)
 
 }
 
-void Compiler::run()
+void Compiler::run(bool isDump)
 {
     if (!isFileExists(filePath)) {
         console("File not exists: " << filePath.toStdString());
@@ -77,7 +77,10 @@ void Compiler::run()
      }
 
      builder.CreateRetVoid();
-     module->dump();
+
+     if (isDump) {
+        module->dump();
+     }
 
     // execute program
 
