@@ -1,13 +1,11 @@
 #include <QtCore>
-#include "defines.h"
+#include "version.h"
 #include "sproutc.h"
 
 int main(int argc, char* argv[]) {
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName("Sprout");
-    auto versionMap = Defines::version();
-    QString versionStr = QString("%1.%2.%3").arg(versionMap["major"].toInt()).arg(versionMap["minor"].toInt()).arg(versionMap["patch"].toInt());
-    QCoreApplication::setApplicationVersion(versionStr);
+    QCoreApplication::setApplicationVersion(Version::full());
 
     QCommandLineParser parser;
     parser.setApplicationDescription("Sprout command line compiler");

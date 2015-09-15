@@ -13,13 +13,13 @@ win32 {
 }
 
 SOURCES += \
-    src/sproutc.cpp \
-    src/defines.cpp
+    src/sproutc.cpp
 
 HEADERS += \
     src/sproutc.h \
     src/defines.h \
-    src/macro.h
+    src/macro.h \
+    src/version.h
 
 INCLUDEPATH += ../sprout-db/src
 INCLUDEPATH += ../../LLVM/include
