@@ -53,34 +53,35 @@ void Compiler::run(bool isDump, bool isExecute)
     llvm::Module* module = modulePtr.get();
     llvm::IRBuilder<> builder(context);
 
-    // 'main' func prototype
+    // 'main' function prototype
+    llvm::FunctionType* mainType = llvm::FunctionType::get(builder.getVoidTy(), false);
+    llvm::Function* mainFunc = llvm::Function::Create(mainType, llvm::Function::ExternalLinkage, "main", module);
+    llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
+    builder.SetInsertPoint(entry);
 
-     llvm::FunctionType* mainType = llvm::FunctionType::get(builder.getVoidTy(), false);
-     llvm::Function* mainFunc = llvm::Function::Create(mainType, llvm::Function::ExternalLinkage, "main", module);
-     llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entrypoint", mainFunc);
-     builder.SetInsertPoint(entry);
+    // 'print-line' function prototype
+    if (instruction == "print-line") {
+        auto printArg = builder.CreateGlobalStringPtr(QString(argument).toStdString());
 
-     if (instruction == "print-line") {
+        std::vector<llvm::Type*> putsArgs;
+        putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
+        llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
 
-         // 'print' function prototype
+        llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
+        llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
 
-         auto printArg = builder.CreateGlobalStringPtr(QString(argument).toStdString());
+        builder.CreateCall(putsFunc, printArg);
 
-         std::vector<llvm::Type*> putsArgs;
-         putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
-         llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
+    // 'read-line' function prototype
+    } else if (instruction == "read-line") {
+         qDebug() << "readline " << argument;
+    }
 
-         llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
-         llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
+    builder.CreateRetVoid();
 
-         builder.CreateCall(putsFunc, printArg);
-     }
-
-     builder.CreateRetVoid();
-
-     if (isDump) {
+    if (isDump) {
         module->dump();
-     }
+    }
 
     if (isExecute) {
         llvm::InitializeNativeTarget();
