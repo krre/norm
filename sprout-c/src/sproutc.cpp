@@ -26,7 +26,7 @@ Compiler::Compiler(const QString& filePath): filePath(filePath)
 
 }
 
-void Compiler::run(bool isDump, bool isExecute)
+void Compiler::run(bool isDump, bool isExecute, bool isEmitFile)
 {
     if (!isFileExists(filePath)) {
         console("File not exists: " << filePath.toStdString());
@@ -93,49 +93,49 @@ void Compiler::run(bool isDump, bool isExecute)
         engine->runFunction(mainFunc, std::vector<llvm::GenericValue>());
     }
 
-    // generate output file
+    if (isEmitFile) {
+        llvm::InitializeAllTargets();
+        llvm::InitializeAllTargetMCs();
+        llvm::InitializeAllAsmPrinters();
+        llvm::InitializeAllAsmParsers();
 
-    llvm::InitializeAllTargets();
-    llvm::InitializeAllTargetMCs();
-    llvm::InitializeAllAsmPrinters();
-    llvm::InitializeAllAsmParsers();
+        llvm::legacy::PassManager pm;
 
-    llvm::legacy::PassManager pm;
+        llvm::TargetOptions options;
 
-    llvm::TargetOptions options;
+        std::string err;
 
-    std::string err;
+        llvm::Triple triple(module->getTargetTriple());
 
-    llvm::Triple triple(module->getTargetTriple());
+        if (triple.getTriple().empty()) {
+            triple.setTriple(llvm::sys::getDefaultTargetTriple());
+        }
 
-    if (triple.getTriple().empty()) {
-        triple.setTriple(llvm::sys::getDefaultTargetTriple());
-    }
+        const llvm::Target* target = llvm::TargetRegistry::lookupTarget(triple.getTriple(), err);
 
-    const llvm::Target* target = llvm::TargetRegistry::lookupTarget(triple.getTriple(), err);
+        std::string mcpu, featuresStr;
 
-    std::string mcpu, featuresStr;
+        llvm::TargetMachine* machineTarget = target->createTargetMachine(triple.getTriple(), mcpu, featuresStr, options);
 
-    llvm::TargetMachine* machineTarget = target->createTargetMachine(triple.getTriple(), mcpu, featuresStr, options);
+        QString objPath = filePath.replace(".sprout", ".o");
+    //    qDebug() << objPath;
 
-    QString objPath = filePath.replace(".sprout", ".o");
-//    qDebug() << objPath;
+        std::error_code ec;
+        llvm::raw_fd_ostream os(objPath.toStdString(), ec, llvm::sys::fs::F_None);
+        llvm::formatted_raw_ostream fos(os);
 
-    std::error_code ec;
-    llvm::raw_fd_ostream os(objPath.toStdString(), ec, llvm::sys::fs::F_None);
-    llvm::formatted_raw_ostream fos(os);
+        if (machineTarget->addPassesToEmitFile(pm, fos, llvm::TargetMachine::CGFT_ObjectFile, false)) {
+            std::cerr << " target does not support generation of this file type!\n";
+            return;
+        }
 
-    if (machineTarget->addPassesToEmitFile(pm, fos, llvm::TargetMachine::CGFT_ObjectFile, false)) {
-        std::cerr << " target does not support generation of this file type!\n";
-        return;
-    }
-
-    bool result = pm.run(*module);
-    if (result) {
-        QProcess* process = new QProcess();
-        QString binPath = objPath;
-        binPath.replace(".o", "");
-        process->start(QString("gcc %1 -o %2").arg(objPath).arg(binPath));
+        bool result = pm.run(*module);
+        if (result) {
+            QProcess* process = new QProcess();
+            QString binPath = objPath;
+            binPath.replace(".o", "");
+            process->start(QString("gcc %1 -o %2").arg(objPath).arg(binPath));
+        }
     }
 }
 
