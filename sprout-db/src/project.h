@@ -7,7 +7,7 @@ class Project : public QObject
     Q_OBJECT
 public:
     Project();
-    static bool create(const QString& path, const QString& projectName);
+    Q_INVOKABLE static bool create(const QString& path, const QString& projectName);
 
 private:
     static void initTables(const QSqlDatabase& db);
