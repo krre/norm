@@ -17,6 +17,9 @@ HEADERS += \
     src/version.h \
     src/compiler.h
 
+target.path += $$(SPROUT_HOME)/bin
+INSTALLS += target
+
 INCLUDEPATH += ../sproutlib/src
 INCLUDEPATH += $$(LLVM_HOME)/include
 

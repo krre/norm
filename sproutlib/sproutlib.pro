@@ -7,6 +7,9 @@ TARGET = sprout
 
 TEMPLATE = lib
 
+target.path += $$(SPROUT_HOME)/bin
+INSTALLS += target
+
 SOURCES += \
     src/sproutdb.cpp \
     src/project.cpp
