@@ -1,16 +1,11 @@
 QT += core sql
 QT -= gui
 
-TARGET = ../../sprout/build/sproutdb
-
 CONFIG += c++11
 
-TEMPLATE = lib
+TARGET = sproutdb
 
-win32 {
-    release: DESTDIR = $$OUT_PWD
-    debug:   DESTDIR = $$OUT_PWD
-}
+TEMPLATE = lib
 
 SOURCES += \
     src/sproutdb.cpp \
