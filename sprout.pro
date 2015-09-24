@@ -1,9 +1,7 @@
 TEMPLATE = subdirs
-SUBDIRS = sprout-db sprout-c sprout-app
+SUBDIRS = compiler sproutlib
 
-sprout-c.depends = sprout-db
-sprout-app.depends = sprout-db
-sprout-app.depends = sprout-c
+compiler.depends = sproutlib
 
 OTHER_FILES += \
     .gitignore \

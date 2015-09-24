@@ -3,7 +3,7 @@ QT -= gui
 
 CONFIG += c++11
 
-TARGET = sproutdb
+TARGET = sprout
 
 TEMPLATE = lib
 

@@ -1,6 +1,6 @@
 #include <QtCore>
 #include "version.h"
-#include "sproutc.h"
+#include "compiler.h"
 
 int main(int argc, char* argv[]) {
     QCoreApplication app(argc, argv);
