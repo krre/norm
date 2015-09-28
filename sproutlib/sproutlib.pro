@@ -3,8 +3,11 @@ QT -= gui
 
 CONFIG += c++11
 
-Debug: TARGET = sproutd
-Release: TARGET = sprout
+CONFIG(debug, debug|release) {
+    TARGET = sproutd
+} else {
+    TARGET = sprout
+}
 
 TEMPLATE = lib
 
