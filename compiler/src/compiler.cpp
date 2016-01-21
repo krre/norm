@@ -32,7 +32,7 @@ void Compiler::run(bool isDump, bool isExecute)
         console("File not exists: " << filePath.toStdString());
         return;
     }
-
+/*
     SproutDb sproutDb;
     sproutDb.open(filePath);
     QVariantList functionList = sproutDb.readRecords("SELECT * FROM Functions WHERE name='main'");
@@ -135,7 +135,7 @@ void Compiler::run(bool isDump, bool isExecute)
             binPath.replace(".o", "");
             process->start(QString("gcc %1 -o %2").arg(objPath).arg(binPath));
         }
-    }
+    }*/
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
