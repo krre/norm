@@ -1,5 +1,4 @@
 #include "compiler.h"
-#include "sproutdb.h"
 #include "macro.h"
 
 #include <llvm/IR/LLVMContext.h>
@@ -32,20 +31,17 @@ void Compiler::run(bool isDump, bool isExecute)
         console("File not exists: " << filePath.toStdString());
         return;
     }
-/*
-    SproutDb sproutDb;
-    sproutDb.open(filePath);
-    QVariantList functionList = sproutDb.readRecords("SELECT * FROM Functions WHERE name='main'");
-    QString functionId = functionList.at(0).toMap().value("id").toString();
+
+//    QString functionId = functionList.at(0).toMap().value("id").toString();
 //        qDebug() << functionId;
-    QVariantList instructionList = sproutDb.readRecords(QString("SELECT * FROM Instructions WHERE functionId=%1").arg(functionId));
+//    QVariantList instructionList = sproutDb.readRecords(QString("SELECT * FROM Instructions WHERE functionId=%1").arg(functionId));
 //        qDebug() << instructionList;
-    QString instructionId = instructionList.at(0).toMap().value("id").toString();
-    QString instruction = instructionList.at(0).toMap().value("name").toString();
+//    QString instructionId = instructionList.at(0).toMap().value("id").toString();
+//    QString instruction = instructionList.at(0).toMap().value("name").toString();
 //        qDebug() << instructionId << instruction;
-    QVariantList argumentList = sproutDb.readRecords(QString("SELECT * FROM Arguments WHERE instructionId=%1").arg(instructionId));
+//    QVariantList argumentList = sproutDb.readRecords(QString("SELECT * FROM Arguments WHERE instructionId=%1").arg(instructionId));
 //        qDebug() << argumentList;
-    QString argument = argumentList.at(0).toMap().value("arg").toString();
+//    QString argument = argumentList.at(0).toMap().value("arg").toString();
 //        qDebug() << argument;
 
     llvm::LLVMContext& context = llvm::getGlobalContext();
@@ -60,22 +56,22 @@ void Compiler::run(bool isDump, bool isExecute)
     builder.SetInsertPoint(entry);
 
     // 'print-line' function prototype
-    if (instruction == "print-line") {
-        auto printArg = builder.CreateGlobalStringPtr(QString(argument).toStdString());
+//    if (instruction == "print-line") {
+//        auto printArg = builder.CreateGlobalStringPtr(QString(argument).toStdString());
 
-        std::vector<llvm::Type*> putsArgs;
-        putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
-        llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
+//        std::vector<llvm::Type*> putsArgs;
+//        putsArgs.push_back(builder.getInt8Ty()->getPointerTo());
+//        llvm::ArrayRef<llvm::Type*>  argsRef(putsArgs);
 
-        llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
-        llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
+//        llvm::FunctionType* putsType = llvm::FunctionType::get(builder.getInt32Ty(), argsRef, false);
+//        llvm::Constant* putsFunc = module->getOrInsertFunction("puts", putsType);
 
-        builder.CreateCall(putsFunc, printArg);
+//        builder.CreateCall(putsFunc, printArg);
 
-    // 'read-line' function prototype
-    } else if (instruction == "read-line") {
-         qDebug() << "readline " << argument;
-    }
+//    // 'read-line' function prototype
+//    } else if (instruction == "read-line") {
+//         qDebug() << "readline " << argument;
+//    }
 
     builder.CreateRetVoid();
 
@@ -106,9 +102,9 @@ void Compiler::run(bool isDump, bool isExecute)
 
         llvm::Triple triple(module->getTargetTriple());
 
-        if (triple.getTriple().empty()) {
-            triple.setTriple(llvm::sys::getDefaultTargetTriple());
-        }
+//        if (triple.getTriple().empty()) {
+//            triple.setTriple(llvm::sys::getDefaultTargetTriple());
+//        }
 
         const llvm::Target* target = llvm::TargetRegistry::lookupTarget(triple.getTriple(), err);
 
@@ -123,10 +119,10 @@ void Compiler::run(bool isDump, bool isExecute)
         llvm::raw_fd_ostream os(objPath.toStdString(), ec, llvm::sys::fs::F_None);
         llvm::formatted_raw_ostream fos(os);
 
-        if (machineTarget->addPassesToEmitFile(pm, fos, llvm::TargetMachine::CGFT_ObjectFile, false)) {
-            std::cerr << " target does not support generation of this file type!\n";
-            return;
-        }
+//        if (machineTarget->addPassesToEmitFile(pm, fos, llvm::TargetMachine::CGFT_ObjectFile, false)) {
+//            std::cerr << " target does not support generation of this file type!\n";
+//            return;
+//        }
 
         bool result = pm.run(*module);
         if (result) {
@@ -135,7 +131,7 @@ void Compiler::run(bool isDump, bool isExecute)
             binPath.replace(".o", "");
             process->start(QString("gcc %1 -o %2").arg(objPath).arg(binPath));
         }
-    }*/
+    }
 }
 
 bool Compiler::isFileExists(const QString& filePath) {
