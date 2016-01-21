@@ -1,11 +1,10 @@
 #include <QtCore>
-#include "version.h"
 #include "compiler.h"
 
 int main(int argc, char* argv[]) {
     QCoreApplication app(argc, argv);
     QCoreApplication::setApplicationName("Sprout");
-    QCoreApplication::setApplicationVersion(Version::full());
+    QCoreApplication::setApplicationVersion("0.1.0");
 
     QCommandLineParser parser;
     parser.setApplicationDescription("Sprout command line compiler");

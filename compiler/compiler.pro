@@ -14,7 +14,6 @@ SOURCES += \
 HEADERS += \
     src/defines.h \
     src/macro.h \
-    src/version.h \
     src/compiler.h
 
 target.path += $$(SPROUT_HOME)/bin
