@@ -110,7 +110,7 @@ void Compiler::run(bool isDump, bool isExecute)
 
         std::string mcpu, featuresStr;
 
-        llvm::TargetMachine* machineTarget = target->createTargetMachine(triple.getTriple(), mcpu, featuresStr, options);
+//        llvm::TargetMachine* machineTarget = target->createTargetMachine(triple.getTriple(), mcpu, featuresStr, options);
 
         QString objPath = filePath.replace(".sprout", ".o");
     //    qDebug() << objPath;
