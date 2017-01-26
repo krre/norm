@@ -20,13 +20,11 @@ win32: LIBS += -limagehlp -lpsapi -lshell32
 
 SOURCES += \
     src/main.cpp \
-    src/Compiler.cpp \
-    src/Transpiler.cpp
+    src/Compiler.cpp
 
 HEADERS += \
     src/Compiler.h \
-    src/Macro.h \
-    src/Transpiler.h
+    src/Macro.h
 
 OTHER_FILES += \
     .gitignore \
