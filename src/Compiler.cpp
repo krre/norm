@@ -135,10 +135,5 @@ void Compiler::run(bool isDump, bool isExecute) {
 
 bool Compiler::isFileExists(const QString& filePath) {
     QFileInfo checkFile(filePath);
-    // check if file exists and if yes: Is it really a file and no directory?
-    if (checkFile.exists() && checkFile.isFile()) {
-        return true;
-    } else {
-        return false;
-    }
+    return checkFile.exists() && checkFile.isFile();
 }
