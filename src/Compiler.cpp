@@ -1,5 +1,6 @@
 #include "Compiler.h"
 #include "Macro.h"
+#include <QtCore>
 
 #include <llvm/IR/LLVMContext.h>
 #include <llvm/IR/Module.h>

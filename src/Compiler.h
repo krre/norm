@@ -1,6 +1,6 @@
 #pragma once
-
-#include <QtCore>
+#include <QObject>
+#include <QString>
 
 class Compiler: public QObject {
     Q_OBJECT
