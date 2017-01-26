@@ -1,5 +1,5 @@
-#include "compiler.h"
-#include "macro.h"
+#include "Compiler.h"
+#include "Macro.h"
 
 #include <llvm/IR/LLVMContext.h>
 #include <llvm/IR/Module.h>

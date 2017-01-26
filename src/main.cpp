@@ -1,5 +1,5 @@
 #include <QtCore>
-#include "compiler.h"
+#include "Compiler.h"
 
 int main(int argc, char* argv[]) {
     QCoreApplication app(argc, argv);
