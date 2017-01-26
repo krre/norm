@@ -2,8 +2,7 @@
 
 #include <QtCore>
 
-class Compiler: public QObject
-{
+class Compiler: public QObject {
     Q_OBJECT
 
 public:

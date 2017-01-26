@@ -20,13 +20,11 @@
 #include <llvm/ExecutionEngine/GenericValue.h>
 #include <llvm/ExecutionEngine/MCJIT.h>
 
-Compiler::Compiler(const QString& filePath): filePath(filePath)
-{
+Compiler::Compiler(const QString& filePath): filePath(filePath) {
 
 }
 
-void Compiler::run(bool isDump, bool isExecute)
-{
+void Compiler::run(bool isDump, bool isExecute) {
     if (!isFileExists(filePath)) {
         console("File not exists: " << filePath.toStdString());
         return;
