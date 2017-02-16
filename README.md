@@ -2,5 +2,5 @@
 Compiler for Sprout language
 
 ## Dependencies
-- Qt 5.5.0
+- Qt 5.8.0
 - LLVM 3.7.1
