@@ -1,4 +1,6 @@
-#include <QtCore>
+#include <QCoreApplication>
+#include <QCommandLineParser>
+#include <QDebug>
 #include "Compiler.h"
 
 int main(int argc, char* argv[]) {
