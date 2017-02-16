@@ -3,7 +3,7 @@
 
 int main(int argc, char* argv[]) {
     QCoreApplication app(argc, argv);
-    QCoreApplication::setApplicationName("Sprout");
+    QCoreApplication::setApplicationName("Sprout Compiler");
     QCoreApplication::setApplicationVersion("0.1.0");
 
     QCommandLineParser parser;
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
     } else {
         const QStringList args = parser.positionalArguments();
         if (args.count() == 0) {
-            qDebug() << "Sprout: unknown source file";
+            qDebug() << "Unknown source file";
             parser.showHelp();
         } else {
             QString filePath = args.at(0);
