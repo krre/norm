@@ -11,13 +11,14 @@ target.path += $$(SPROUT_HOME)/bin
 INSTALLS += target
 
 SOURCES += \
-    src/main.cpp \
-    src/Compiler.cpp
+    Source/main.cpp \
+    Source/Compiler.cpp
 
 HEADERS += \
-    src/Compiler.h \
-    src/Macro.h
+    Source/Compiler.h \
+    Source/Macro.h
 
 OTHER_FILES += \
     .gitignore \
     README.md
+
