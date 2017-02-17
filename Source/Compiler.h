@@ -7,7 +7,7 @@ class Compiler: public QObject {
 
 public:
     Compiler(const QString& filePath);
-    void run(bool isDump = false, bool isExecute = false);
+    void run();
 private:
     QString filePath;
     bool isFileExists(const QString& filePath);

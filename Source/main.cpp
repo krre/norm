@@ -15,8 +15,7 @@ int main(int argc, char* argv[]) {
     parser.addPositionalArgument("source", QCoreApplication::translate("main", "Source file to compile"));
 
     parser.addOptions({
-        {{"d", "dump"}, QCoreApplication::translate("main", "Dump IR code")},
-        {{"e", "execute"}, QCoreApplication::translate("main", "Execute in memory")}
+        {{"o", "output"}, QCoreApplication::translate("main", "Output directory")},
     });
 
     parser.process(app);
@@ -30,10 +29,8 @@ int main(int argc, char* argv[]) {
             parser.showHelp();
         } else {
             QString filePath = args.at(0);
-            bool isDump = parser.isSet("dump");
-            bool isExecute = parser.isSet("execute");
             Compiler compiler(filePath);
-            compiler.run(isDump, isExecute);
+            compiler.run();
         }
     }
 
