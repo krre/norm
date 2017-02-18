@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
         } else {
             QString filePath = args.at(0);
             Compiler compiler(filePath);
-            compiler.run();
+            compiler.build();
         }
     }
 

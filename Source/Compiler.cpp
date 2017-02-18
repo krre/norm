@@ -6,7 +6,7 @@ Compiler::Compiler(const QString& filePath): filePath(filePath) {
 
 }
 
-void Compiler::run() {
+void Compiler::build() {
     if (!isFileExists(filePath)) {
         console("File not exists: " << filePath.toStdString());
         return;
