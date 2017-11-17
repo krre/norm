@@ -1,7 +1,7 @@
 QT += core sql
 
 CONFIG += c++11
-TARGET = irbis
+TARGET = ../../../build/irbis
 TEMPLATE = app
 
 SOURCES += \
