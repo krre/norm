@@ -11,3 +11,7 @@ SOURCES += \
 
 HEADERS += \
     Core/Defines.h
+
+DISTFILES += \
+    ../README.md \
+    ../.gitignore
