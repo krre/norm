@@ -1,4 +1,5 @@
 QT += core sql
+QT -= gui
 
 CONFIG += c++11
 TARGET = irbis
