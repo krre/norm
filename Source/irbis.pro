@@ -7,3 +7,6 @@ DESTDIR = $$(IRBIS_HOME)/build
 
 SOURCES += \
     main.cpp
+
+HEADERS += \
+    Core/Defines.h
