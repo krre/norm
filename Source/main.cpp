@@ -1,7 +1,7 @@
+#include "Core/Defines.h"
+#include "Core/Utils.h"
 #include <QCoreApplication>
 #include <QCommandLineParser>
-#include <QDebug>
-#include "Core/Defines.h"
 
 int main(int argc, char *argv[]) {
     QCoreApplication app(argc, argv);
@@ -25,11 +25,11 @@ int main(int argc, char *argv[]) {
     } else {
         const QStringList args = parser.positionalArguments();
         if (args.count() == 0) {
-            qDebug() << "Unknown source file";
+            qStdOut() << "Unknown source file";
             parser.showHelp();
         } else {
             QString filePath = args.at(0);
-            qDebug() << "Compile" << filePath;
+            qStdOut() << "Compile " << filePath;
         }
     }
 

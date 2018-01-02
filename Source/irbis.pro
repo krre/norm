@@ -10,7 +10,8 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    Core/Defines.h
+    Core/Defines.h \
+    Core/Utils.h
 
 DISTFILES += \
     ../README.md \
