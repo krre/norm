@@ -6,6 +6,8 @@ TARGET = irbis
 TEMPLATE = app
 DESTDIR = $$(IRBIS_HOME)/build
 
+INCLUDEPATH += $$(IRBIS_HOME)/irbislib/Source
+
 SOURCES += \
     main.cpp
 

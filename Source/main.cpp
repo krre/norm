@@ -1,5 +1,5 @@
 #include "Core/Defines.h"
-#include "Core/Utils.h"
+#include <IrbisLib/Core/Utils.h>
 #include <QCoreApplication>
 #include <QCommandLineParser>
 
@@ -25,11 +25,11 @@ int main(int argc, char *argv[]) {
     } else {
         const QStringList args = parser.positionalArguments();
         if (args.count() == 0) {
-            Irbis::qStdOut() << "Unknown source file";
+            IrbisLib::qStdOut() << "Unknown source file";
             parser.showHelp();
         } else {
             QString filePath = args.at(0);
-            Irbis::qStdOut() << "Compile " << filePath;
+            IrbisLib::qStdOut() << "Compile " << filePath;
         }
     }
 
