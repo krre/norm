@@ -25,11 +25,11 @@ int main(int argc, char *argv[]) {
     } else {
         const QStringList args = parser.positionalArguments();
         if (args.count() == 0) {
-            qStdOut() << "Unknown source file";
+            Irbis::qStdOut() << "Unknown source file";
             parser.showHelp();
         } else {
             QString filePath = args.at(0);
-            qStdOut() << "Compile " << filePath;
+            Irbis::qStdOut() << "Compile " << filePath;
         }
     }
 
