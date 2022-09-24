@@ -1,5 +1,5 @@
 [package]
-name = "norm-compiler"
+name = "normc"
 version = "0.1.0"
 edition = "2021"
 
