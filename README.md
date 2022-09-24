@@ -1,2 +1,2 @@
 # Norm Compiler
-Norm language compiler
+Compiler for Norm language
