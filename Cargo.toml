@@ -1,8 +1,9 @@
 [package]
 name = "normc"
 version = "0.1.0"
+authors = ["Vladimir Zarypov"]
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+description = "Compiler for Norm language"
+repository = "https://github.com/krre/norm-compiler"
 
 [dependencies]
