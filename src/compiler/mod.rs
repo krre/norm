@@ -1,4 +1,7 @@
+use super::project;
+
 pub fn run(file_path: &String) -> Result<(), Box<dyn std::error::Error>> {
-    let file = std::fs::File::open(file_path)?;
+    let project = project::Project::new();
+    project.read(file_path)?;
     Ok(())
 }
