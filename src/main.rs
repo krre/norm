@@ -7,7 +7,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     if args.len() == 1 {
         println!("Usage: normc [options] file");
-        return Result::Ok(());
+        return Ok(());
     }
 
     compiler::run(&args[1])?;
