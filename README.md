@@ -1,2 +1,2 @@
-# Norm Compiler
-Compiler for Norm programming language.
+# Norm
+Experimental visual programming language.

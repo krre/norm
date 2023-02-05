@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "normc"
+name = "norm"
 version = "0.1.0"
