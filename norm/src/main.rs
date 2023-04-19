@@ -1,3 +1,3 @@
 fn main() {
-    println!("Norm");
+    println!("Tool for managing Norm's source code");
 }
