@@ -1,9 +1,2 @@
-[package]
-name = "norm"
-version = "0.1.0"
-authors = ["Vladimir Zarypov <krre31@gmail.com>"]
-edition = "2021"
-description = "Experimental visual programming language"
-repository = "https://github.com/krre/norm"
-
-[dependencies]
+[workspace]
+members = ["norm", "norm-shell", "norm-compiler"]
