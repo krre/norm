@@ -7,4 +7,4 @@ pub fn run(file_path: &String) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn compile(project: &project::Project) {}
+fn compile(_project: &project::Project) {}
