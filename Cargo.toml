@@ -1,2 +1,0 @@
-[workspace]
-members = ["norm", "norm-shell", "norm-compiler", "norm-common"]
