@@ -17,6 +17,7 @@ public:
     Type type() const { return m_type; }
 
     static Project* read(const std::string& filePath);
+    void write(const std::string& filePath);
 
 private:
     std::string m_name;
