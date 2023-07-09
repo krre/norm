@@ -2,7 +2,7 @@
 
 namespace Norm {
 
-Project::Project(const std::string& name) : m_name(name) {
+Project::Project(const std::string& name, Type type) : m_name(name), m_type(type) {
 
 }
 
