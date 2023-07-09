@@ -1,3 +1,3 @@
 add_library(common STATIC
-    token/Token.h token/Token.cpp
-    token/Project.h token/Project.cpp)
+    norm/token/Token.h norm/token/Token.cpp
+    norm/token/Project.h norm/token/Project.cpp)
