@@ -1,5 +1,5 @@
 #include "Function.h"
-#include "norm/token/statement/Statement.h"
+#include "norm/token/expression/BlockExpression.h"
 
 namespace Norm {
 
@@ -15,8 +15,8 @@ std::string Function::description() const {
     return "Function";
 }
 
-void Function::addStatement(std::unique_ptr<Statement> statement) {
-    m_statements.push_back(std::move(statement));
+void Function::setBlock(std::unique_ptr<BlockExpression> block) {
+    m_block = std::move(block);
 }
 
 }

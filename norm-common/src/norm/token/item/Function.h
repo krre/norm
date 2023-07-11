@@ -1,12 +1,11 @@
 #pragma once
 #include "Item.h"
 #include <string>
-#include <vector>
 #include <memory>
 
 namespace Norm {
 
-class Statement;
+class BlockExpression;
 
 class Function : public Item {
 public:
@@ -15,11 +14,12 @@ public:
 
     std::string description() const override;
 
-    void addStatement(std::unique_ptr<Statement> statement);
+    void setBlock(std::unique_ptr<BlockExpression> block);
+    BlockExpression* block() const { return m_block.get(); }
 
 private:
     std::string m_name;
-    std::vector<std::unique_ptr<Statement>> m_statements;
+    std::unique_ptr<BlockExpression> m_block;
 };
 
 }
