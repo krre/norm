@@ -1,4 +1,5 @@
 #include "Project.h"
+#include "BinaryProject.h"
 #include "norm/token/Function.h"
 #include <fstream>
 
@@ -15,7 +16,7 @@ Project::~Project() {
 }
 
 Project* Project::read(const std::string& filePath) {
-    return new Project("");
+    return new BinaryProject("");
 }
 
 void Project::write(const std::string& filePath) {

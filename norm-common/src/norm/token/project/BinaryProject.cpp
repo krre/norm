@@ -7,4 +7,8 @@ BinaryProject::BinaryProject(const std::string& name) : Project(name) {
     m_main = std::make_unique<Function>("Main");
 }
 
+std::string BinaryProject::description() const {
+    return "Binary project";
+}
+
 }

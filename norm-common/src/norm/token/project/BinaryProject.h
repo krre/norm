@@ -8,6 +8,7 @@ class BinaryProject : public Project {
 public:
     BinaryProject(const std::string& name);
 
+    std::string description() const override;
     Function* main() const { return m_main.get(); }
 
 private:
