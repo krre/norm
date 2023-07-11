@@ -1,0 +1,10 @@
+#include "BinaryProject.h"
+#include "norm/token/Function.h"
+
+namespace Norm {
+
+BinaryProject::BinaryProject(const std::string& name) : Project(name) {
+    m_main = std::make_unique<Function>("Main");
+}
+
+}

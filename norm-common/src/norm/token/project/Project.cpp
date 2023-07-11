@@ -1,10 +1,10 @@
 #include "Project.h"
-#include "Function.h"
+#include "norm/token/Function.h"
 #include <fstream>
 
 namespace Norm {
 
-Project::Project(const std::string& name, Type type) : m_name(name), m_type(type) {
+Project::Project(const std::string& name) : m_name(name) {
 
 }
 
@@ -15,7 +15,7 @@ Project::~Project() {
 }
 
 Project* Project::read(const std::string& filePath) {
-    return new Project("", Project::Type::Binary);
+    return new Project("");
 }
 
 void Project::write(const std::string& filePath) {
@@ -27,10 +27,6 @@ void Project::write(const std::string& filePath) {
 
 void Project::addFunction(Function* function) {
     m_functions.push_back(function);
-}
-
-void Project::setMain(Function* main) {
-    m_main = main;
 }
 
 }
