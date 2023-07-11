@@ -5,6 +5,7 @@ add_library(common STATIC
     norm/token/project/BinaryProject.h norm/token/project/BinaryProject.cpp
     norm/token/project/LibraryProject.h norm/token/project/LibraryProject.cpp
     norm/token/statement/Statement.h norm/token/statement/Statement.cpp
+    norm/token/expression/Expression.h norm/token/expression/Expression.cpp
 )
 
 set_target_properties(common PROPERTIES OUTPUT_NAME norm)
