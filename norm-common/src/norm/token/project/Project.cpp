@@ -10,9 +10,7 @@ Project::Project(const std::string& name) : m_name(name) {
 }
 
 Project::~Project() {
-    for (auto func : m_functions) {
-        delete func;
-    }
+
 }
 
 Project* Project::read(const std::string& filePath) {
@@ -26,8 +24,8 @@ void Project::write(const std::string& filePath) {
     fs.close();
 }
 
-void Project::addFunction(Function* function) {
-    m_functions.push_back(function);
+void Project::addFunction(std::unique_ptr<Function> function) {
+    m_functions.push_back(std::move(function));
 }
 
 }

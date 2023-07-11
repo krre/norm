@@ -2,6 +2,7 @@
 #include "norm/token/Token.h"
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace Norm {
 
@@ -17,12 +18,11 @@ public:
     static Project* read(const std::string& filePath);
     void write(const std::string& filePath);
 
-    // Take ownership of Function.
-    void addFunction(Function* function);
+    void addFunction(std::unique_ptr<Function> function);
 
 private:
     std::string m_name;
-    std::vector<Function*> m_functions;
+    std::vector<std::unique_ptr<Function>> m_functions;
 };
 
 }
