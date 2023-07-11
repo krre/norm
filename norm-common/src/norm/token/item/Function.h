@@ -1,5 +1,5 @@
 #pragma once
-#include "Token.h"
+#include "Item.h"
 #include <string>
 #include <vector>
 #include <memory>
@@ -8,7 +8,7 @@ namespace Norm {
 
 class Statement;
 
-class Function : public Token {
+class Function : public Item {
 public:
     Function(const std::string& name);
     virtual ~Function();

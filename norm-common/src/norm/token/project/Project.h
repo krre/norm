@@ -6,7 +6,7 @@
 
 namespace Norm {
 
-class Function;
+class Item;
 
 class Project : public Token {
 public:
@@ -18,11 +18,11 @@ public:
     static Project* read(const std::string& filePath);
     void write(const std::string& filePath);
 
-    void addFunction(std::unique_ptr<Function> function);
+    void addItem(std::unique_ptr<Item> item);
 
 private:
     std::string m_name;
-    std::vector<std::unique_ptr<Function>> m_functions;
+    std::vector<std::unique_ptr<Item>> m_items;
 };
 
 }

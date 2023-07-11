@@ -1,6 +1,6 @@
 #include "Project.h"
 #include "BinaryProject.h"
-#include "norm/token/Function.h"
+#include "norm/token/item/Item.h"
 #include <fstream>
 
 namespace Norm {
@@ -24,8 +24,8 @@ void Project::write(const std::string& filePath) {
     fs.close();
 }
 
-void Project::addFunction(std::unique_ptr<Function> function) {
-    m_functions.push_back(std::move(function));
+void Project::addItem(std::unique_ptr<Item> item) {
+    m_items.push_back(std::move(item));
 }
 
 }

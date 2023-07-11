@@ -4,6 +4,8 @@
 
 namespace Norm {
 
+class Function;
+
 class BinaryProject : public Project {
 public:
     BinaryProject(const std::string& name);

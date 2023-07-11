@@ -1,5 +1,5 @@
 #include "BinaryProject.h"
-#include "norm/token/Function.h"
+#include "norm/token/item/Function.h"
 
 namespace Norm {
 
