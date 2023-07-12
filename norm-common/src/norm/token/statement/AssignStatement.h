@@ -8,6 +8,8 @@ public:
     AssignStatement();
 
     std::string description() const override;
+
+private:
 };
 
 }

@@ -11,6 +11,7 @@ add_library(common STATIC
     norm/token/statement/AssignStatement.h norm/token/statement/AssignStatement.cpp
     norm/token/type/Type.h norm/token/type/Type.cpp
     norm/token/type/Integer.h norm/token/type/Integer.cpp
+    norm/token/Identifier.h norm/token/Identifier.cpp
 )
 
 set_target_properties(common PROPERTIES OUTPUT_NAME norm)
