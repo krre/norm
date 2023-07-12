@@ -6,4 +6,8 @@ Expression::Expression() {
 
 }
 
+void Expression::setResult(Type* result) {
+    m_result = result;
+}
+
 }
