@@ -13,6 +13,7 @@ add_library(common STATIC
     norm/token/type/Integer.h norm/token/type/Integer.cpp
     norm/token/Identifier.h norm/token/Identifier.cpp
     norm/token/expression/LiteralExpression.h norm/token/expression/LiteralExpression.cpp
+    norm/token/expression/OperatorExpression.h norm/token/expression/OperatorExpression.cpp
 )
 
 set_target_properties(common PROPERTIES OUTPUT_NAME norm)
