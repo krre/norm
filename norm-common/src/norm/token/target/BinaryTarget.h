@@ -1,14 +1,14 @@
 #pragma once
-#include "Project.h"
+#include "Target.h"
 #include <memory>
 
 namespace Norm {
 
 class Function;
 
-class BinaryProject : public Project {
+class BinaryTarget : public Target {
 public:
-    BinaryProject(const std::string& name);
+    BinaryTarget(const std::string& name);
 
     std::string description() const override;
     Function* main() const { return m_main.get(); }

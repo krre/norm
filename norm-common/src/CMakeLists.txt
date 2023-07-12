@@ -1,9 +1,9 @@
 add_library(common STATIC
     norm/token/Token.h norm/token/Token.cpp
-    norm/token/project/Project.h norm/token/project/Project.cpp
+    norm/token/target/Target.h norm/token/target/Target.cpp
+    norm/token/target/BinaryTarget.h norm/token/target/BinaryTarget.cpp
+    norm/token/target/LibraryTarget.h norm/token/target/LibraryTarget.cpp
     norm/token/item/Function.h norm/token/item/Function.cpp
-    norm/token/project/BinaryProject.h norm/token/project/BinaryProject.cpp
-    norm/token/project/LibraryProject.h norm/token/project/LibraryProject.cpp
     norm/token/statement/Statement.h norm/token/statement/Statement.cpp
     norm/token/expression/Expression.h norm/token/expression/Expression.cpp
     norm/token/item/Item.h norm/token/item/Item.cpp

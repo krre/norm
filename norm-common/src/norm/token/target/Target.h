@@ -8,14 +8,14 @@ namespace Norm {
 
 class Item;
 
-class Project : public Token {
+class Target : public Token {
 public:
-    Project(const std::string& name);
-    ~Project();
+    Target(const std::string& name);
+    ~Target();
 
     const std::string& name() const { return m_name; }
 
-    static Project* read(const std::string& filePath);
+    static Target* read(const std::string& filePath);
     void write(const std::string& filePath);
 
     void addItem(std::unique_ptr<Item> item);
