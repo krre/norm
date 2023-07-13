@@ -2,7 +2,7 @@
 
 namespace Norm {
 
-LiteralExpression::LiteralExpression() {
+LiteralExpression::LiteralExpression(const std::string& literal) : m_literal(literal) {
 
 }
 

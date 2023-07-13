@@ -3,18 +3,20 @@
 
 namespace Norm {
 
+class Integer;
+
 class LiteralExpression : public Expression {
 public:
-    LiteralExpression();
+    LiteralExpression(const std::string& literal);
+    const std::string& literal() const { return m_literal; }
+
+private:
+    std::string m_literal;
 };
 
 class IntegerLiteral : private LiteralExpression {
 public:
-    IntegerLiteral(int literal) : m_literal(literal) {}
-    int literal() const { return m_literal; }
-
-private:
-    int m_literal = 0;
+    IntegerLiteral(const std::string& literal) : LiteralExpression(literal) {}
 };
 
 }
