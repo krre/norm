@@ -6,4 +6,8 @@ Integer::Integer() : Type("Integer") {
 
 }
 
+std::string Integer::description() const {
+    return "Integer type";
+}
+
 }
