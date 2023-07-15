@@ -10,4 +10,8 @@ void OperatorExpression::addExpression(std::unique_ptr<Expression> expression) {
     m_expressions.push_back(std::move(expression));
 }
 
+std::string SumOperator::description() const {
+    return "Sum operator";
+}
+
 }

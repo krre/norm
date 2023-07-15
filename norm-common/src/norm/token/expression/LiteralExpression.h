@@ -25,6 +25,12 @@ private:
 class IntegerLiteral : public LiteralExpression<Integer> {
 public:
     IntegerLiteral(const std::string& literal) : LiteralExpression(literal) {}
+
+    std::string description() const override;
 };
+
+std::string IntegerLiteral::description() const {
+    return "Integer literal";
+}
 
 }

@@ -19,6 +19,8 @@ private:
 class SumOperator : public OperatorExpression {
 public:
     SumOperator() {}
+
+    std::string description() const override;
 };
 
 }
