@@ -9,10 +9,6 @@ Target::Target(const std::string& name) : m_name(name) {
 
 }
 
-Target::~Target() {
-
-}
-
 Target* Target::read(const std::string& filePath) {
     return new BinaryTarget("");
 }
