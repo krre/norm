@@ -18,11 +18,10 @@ public:
     static Target* read(const std::string& filePath);
     void write(const std::string& filePath);
 
-    void addItem(std::unique_ptr<Item> item);
+    void addItem(Item* item);
 
 private:
     std::string m_name;
-    std::vector<std::unique_ptr<Item>> m_items;
 };
 
 }

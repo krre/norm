@@ -24,8 +24,8 @@ void Target::write(const std::string& filePath) {
     fs.close();
 }
 
-void Target::addItem(std::unique_ptr<Item> item) {
-    m_items.push_back(std::move(item));
+void Target::addItem(Item* item) {
+    addChild(item);
 }
 
 }

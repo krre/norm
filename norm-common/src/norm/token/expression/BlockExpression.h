@@ -10,14 +10,10 @@ class Statement;
 class BlockExpression : public Expression {
 public:
     BlockExpression();
-    ~BlockExpression();
 
     std::string description() const override;
 
-    void addStatement(std::unique_ptr<Statement> statement);
-
-private:
-    std::vector<std::unique_ptr<Statement>> m_statements;
+    void addStatement(Statement* statement);
 };
 
 }

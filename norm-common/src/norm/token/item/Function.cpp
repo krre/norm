@@ -7,16 +7,13 @@ Function::Function(const std::string& name) : m_name(name) {
 
 }
 
-Function::~Function() {
-
-}
-
 std::string Function::description() const {
     return "Function";
 }
 
-void Function::setBlock(std::unique_ptr<BlockExpression> block) {
-    m_block = std::move(block);
+void Function::setBlock(BlockExpression* block) {
+    m_block = block;
+    addChild(block);
 }
 
 }

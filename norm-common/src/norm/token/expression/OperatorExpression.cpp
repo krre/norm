@@ -6,8 +6,8 @@ OperatorExpression::OperatorExpression() {
 
 }
 
-void OperatorExpression::addExpression(std::unique_ptr<Expression> expression) {
-    m_expressions.push_back(std::move(expression));
+void OperatorExpression::addExpression(Expression* expression) {
+    addChild(expression);
 }
 
 std::string SumOperator::description() const {

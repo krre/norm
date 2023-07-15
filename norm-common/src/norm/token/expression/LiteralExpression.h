@@ -9,17 +9,18 @@ template <typename T>
 class LiteralExpression : public Expression {
 public:
     LiteralExpression(const std::string& literal) : m_literal(literal) {
-        m_type = std::make_unique<T>();
+        m_type = new T;
+        addChild(m_type);
     }
 
     ~LiteralExpression() {}
 
     const std::string& literal() const { return m_literal; }
-    T* type() const  { return m_type.get(); }
+    T* type() const  { return m_type; }
 
 private:
     std::string m_literal;
-    std::unique_ptr<T> m_type;
+    T* m_type = nullptr;
 };
 
 class IntegerLiteral : public LiteralExpression<Integer> {

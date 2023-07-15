@@ -11,10 +11,10 @@ public:
     BinaryTarget(const std::string& name);
 
     std::string description() const override;
-    Function* main() const { return m_main.get(); }
+    Function* main() const { return m_main; }
 
 private:
-    std::unique_ptr<Function> m_main;
+    Function* m_main = nullptr;
 };
 
 }

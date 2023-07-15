@@ -10,16 +10,15 @@ class BlockExpression;
 class Function : public Item {
 public:
     Function(const std::string& name);
-    virtual ~Function();
 
     std::string description() const override;
 
-    void setBlock(std::unique_ptr<BlockExpression> block);
-    BlockExpression* block() const { return m_block.get(); }
+    void setBlock(BlockExpression* block);
+    BlockExpression* block() const { return m_block; }
 
 private:
     std::string m_name;
-    std::unique_ptr<BlockExpression> m_block;
+    BlockExpression* m_block = nullptr;
 };
 
 }
