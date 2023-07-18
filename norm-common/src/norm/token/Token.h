@@ -6,12 +6,25 @@ namespace Norm {
 
 class Token {
 public:
+    enum class Code : int8_t {
+        BinaryTarget =      0x00,
+        LibraryTarget =     0x01,
+        Function =          0x02,
+        AssignStatement =   0x03,
+        BlockExpression =   0x04,
+        IntegerLiteral =    0x05,
+        SumOperator =       0x06,
+        Integer =           0x07,
+        Identifier =        0x08,
+    };
+
     explicit Token() = default;
     Token(const Token& other) = delete;
     Token& operator=(const Token& other) = delete;
 
     virtual ~Token();
 
+    virtual Code code() const = 0;
     virtual std::string description() const = 0;
 
 protected:

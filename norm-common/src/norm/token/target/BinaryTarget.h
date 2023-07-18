@@ -10,7 +10,9 @@ class BinaryTarget : public Target {
 public:
     BinaryTarget(const std::string& name);
 
+    Code code() const override { return Code::BinaryTarget; }
     std::string description() const override;
+
     Function* main() const { return m_main; }
 
 private:

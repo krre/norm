@@ -11,6 +11,8 @@ public:
 
     const std::string& name() const { return m_name; }
     Type* type() const { return m_type; }
+
+    Code code() const override { return Code::Identifier; }
     std::string description() const override;
 
 private:

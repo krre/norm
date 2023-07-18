@@ -11,6 +11,7 @@ class Function : public Item {
 public:
     Function(const std::string& name);
 
+    Code code() const override { return Code::Function; }
     std::string description() const override;
 
     void setBlock(BlockExpression* block);

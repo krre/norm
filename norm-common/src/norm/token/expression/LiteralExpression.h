@@ -27,6 +27,7 @@ class IntegerLiteral : public LiteralExpression<Integer> {
 public:
     IntegerLiteral(const std::string& literal) : LiteralExpression(literal) {}
 
+    Code code() const override { return Code::IntegerLiteral; }
     std::string description() const override;
 };
 

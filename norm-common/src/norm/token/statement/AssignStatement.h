@@ -11,6 +11,7 @@ class AssignStatement : public Statement {
 public:
     AssignStatement();
 
+    Code code() const override { return Code::AssignStatement; }
     std::string description() const override;
 
     void setIdentifier(Identifier* identifier);
