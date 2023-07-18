@@ -3,6 +3,16 @@
 
 namespace Norm {
 
+Token::Id Token::s_maxId = 0;
+
+Token::Token(Id id) : m_id(id) {
+
+}
+
+Token::Token() {
+    m_id = ++s_maxId;
+}
+
 Token::Token(Token* parent) {
     setParent(parent);
 }

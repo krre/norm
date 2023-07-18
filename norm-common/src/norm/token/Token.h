@@ -18,7 +18,11 @@ public:
         Identifier =        0x08,
     };
 
-    explicit Token() = default;
+    using Id = uint16_t;
+
+    explicit Token(Id id);
+    explicit Token();
+
     Token(const Token& other) = delete;
     Token& operator=(const Token& other) = delete;
 
@@ -26,6 +30,12 @@ public:
 
     virtual Code code() const = 0;
     virtual std::string description() const = 0;
+
+    Id id() const { return m_id; }
+    void setId(Id id) { m_id = id; }
+
+    static Id maxId() { return s_maxId; }
+    static void setMaxId(Id maxId) { s_maxId = maxId; }
 
 protected:
     explicit Token(Token* parent);
@@ -49,8 +59,11 @@ protected:
 private:
     void setupNewChild(Token* child);
 
+    Id m_id = 0;
     Token* m_parent = nullptr;
     std::vector<Token*> m_children;
+
+    static Id s_maxId;
 };
 
 }
