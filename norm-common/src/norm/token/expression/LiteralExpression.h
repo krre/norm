@@ -1,7 +1,6 @@
 #pragma once
 #include "Expression.h"
 #include "norm/token/type/Integer.h"
-#include <memory>
 
 namespace Norm {
 

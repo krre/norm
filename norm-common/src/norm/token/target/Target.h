@@ -1,8 +1,6 @@
 #pragma once
 #include "norm/token/Token.h"
 #include <string>
-#include <vector>
-#include <memory>
 
 namespace Norm {
 

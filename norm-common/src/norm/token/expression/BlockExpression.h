@@ -1,7 +1,5 @@
 #pragma once
 #include "Expression.h"
-#include <vector>
-#include <memory>
 
 namespace Norm {
 

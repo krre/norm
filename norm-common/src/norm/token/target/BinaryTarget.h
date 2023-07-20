@@ -1,6 +1,5 @@
 #pragma once
 #include "Target.h"
-#include <memory>
 
 namespace Norm {
 
