@@ -1,4 +1,5 @@
 #include "Token.h"
+#include <fstream>
 #include <assert.h>
 
 namespace Norm {
@@ -20,6 +21,14 @@ Token::Token(Token* parent) {
 Token::~Token() {
     setParent(nullptr);
     deleteChildren();
+}
+
+void Token::serialize(std::ofstream* stream) {
+    stream->write(reinterpret_cast<const char*>(&m_id), sizeof m_id);
+}
+
+void Token::deserialize(std::ifstream* stream, [[maybe_unused]] TokenProvider* provider) {
+    stream->read(reinterpret_cast<char*>(&m_id), sizeof m_id);
 }
 
 void Token::setParent(Token* parent) {

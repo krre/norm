@@ -9,6 +9,7 @@ class Item;
 class Target : public Token {
 public:
     Target(const std::string& name);
+    Target() = default;
 
     const std::string& name() const { return m_name; }
 

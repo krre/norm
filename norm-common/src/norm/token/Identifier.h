@@ -8,6 +8,7 @@ class Type;
 class Identifier : public Token  {
 public:
     Identifier(const std::string& name, Type* type);
+    Identifier() = default;
 
     const std::string& name() const { return m_name; }
     Type* type() const { return m_type; }

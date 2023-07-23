@@ -8,6 +8,7 @@ class BlockExpression;
 class Function : public Item {
 public:
     Function(const std::string& name);
+    Function() = default;
 
     Code code() const override { return Code::Function; }
     std::string description() const override;

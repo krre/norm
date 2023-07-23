@@ -12,7 +12,7 @@ public:
         addChild(m_type);
     }
 
-    ~LiteralExpression() {}
+    LiteralExpression() = default;
 
     const std::string& literal() const { return m_literal; }
     T* type() const  { return m_type; }
@@ -25,13 +25,10 @@ private:
 class IntegerLiteral : public LiteralExpression<Integer> {
 public:
     IntegerLiteral(const std::string& literal) : LiteralExpression(literal) {}
+    IntegerLiteral() = default;
 
     Code code() const override { return Code::IntegerLiteral; }
-    std::string description() const override;
+    std::string description() const override { return "Integer literal"; }
 };
-
-std::string IntegerLiteral::description() const {
-    return "Integer literal";
-}
 
 }

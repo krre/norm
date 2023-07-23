@@ -8,6 +8,7 @@ class Function;
 class BinaryTarget : public Target {
 public:
     BinaryTarget(const std::string& name);
+    BinaryTarget() = default;
 
     Code code() const override { return Code::BinaryTarget; }
     std::string description() const override;
