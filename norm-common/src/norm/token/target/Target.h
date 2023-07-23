@@ -12,9 +12,6 @@ public:
 
     const std::string& name() const { return m_name; }
 
-    static Target* read(const std::string& filePath);
-    void write(const std::string& filePath);
-
     void addItem(Item* item);
 
 private:
