@@ -30,7 +30,7 @@ private:
         m_tokenCreators[code] = [] { return new T; };
     }
 
-    Token* readToken(std::ifstream* stream, TokenProvider* provider);
+    Token* readToken(std::ifstream* stream);
 
     std::unordered_map<Token::Code, std::function<Token*()>> m_tokenCreators;
 };

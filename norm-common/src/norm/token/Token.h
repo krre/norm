@@ -4,8 +4,6 @@
 
 namespace Norm {
 
-class TokenProvider;
-
 class Token {
 public:
     enum class Code : int8_t {
@@ -40,7 +38,7 @@ public:
     static void setMaxId(Id maxId) { s_maxId = maxId; }
 
     virtual void serialize(std::ofstream* stream);
-    virtual void deserialize(std::ifstream* stream, TokenProvider* provider);
+    virtual void deserialize(std::ifstream* stream);
 
     const std::vector<Token*>& children() const { return m_children; }
 

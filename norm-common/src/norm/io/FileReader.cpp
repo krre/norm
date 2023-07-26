@@ -32,7 +32,7 @@ Token* FileReader::read(const std::string& filePath) {
     Token* startToken = nullptr;
 
     while (!stream.eof()) {
-        Token* token = readToken(&stream, &provider);
+        Token* token = readToken(&stream);
         tokens[token->id()] = token;
 
         if (!startToken && (token->code() == Token::Code::BinaryTarget || token->code() == Token::Code::LibraryTarget)) {
@@ -43,7 +43,7 @@ Token* FileReader::read(const std::string& filePath) {
     return startToken;
 }
 
-Token* FileReader::readToken(std::ifstream* stream, TokenProvider* provider) {
+Token* FileReader::readToken(std::ifstream* stream) {
     Token::Code code;
     stream->read(reinterpret_cast<char*>(&code), sizeof code);
 
@@ -53,7 +53,7 @@ Token* FileReader::readToken(std::ifstream* stream, TokenProvider* provider) {
     }
 
     Token* token = m_tokenCreators.at(code)();
-    token->deserialize(stream, provider);
+    token->deserialize(stream);
     return token;
 }
 

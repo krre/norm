@@ -27,7 +27,7 @@ void Token::serialize(std::ofstream* stream) {
     stream->write(reinterpret_cast<const char*>(&m_id), sizeof m_id);
 }
 
-void Token::deserialize(std::ifstream* stream, [[maybe_unused]] TokenProvider* provider) {
+void Token::deserialize(std::ifstream* stream) {
     stream->read(reinterpret_cast<char*>(&m_id), sizeof m_id);
 }
 
