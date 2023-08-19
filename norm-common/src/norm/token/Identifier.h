@@ -14,7 +14,6 @@ public:
     Type* type() const { return m_type; }
 
     Code code() const override { return Code::Identifier; }
-    std::string description() const override;
 
 private:
     std::string m_name;

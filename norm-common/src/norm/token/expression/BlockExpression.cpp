@@ -7,10 +7,6 @@ BlockExpression::BlockExpression() {
 
 }
 
-std::string BlockExpression::description() const {
-    return "Block expression";
-}
-
 void BlockExpression::addStatement(Statement* statement) {
     addChild(statement);
 }

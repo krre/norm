@@ -11,7 +11,6 @@ public:
     BinaryTarget() = default;
 
     Code code() const override { return Code::BinaryTarget; }
-    std::string description() const override;
 
     Function* main() const { return m_main; }
 

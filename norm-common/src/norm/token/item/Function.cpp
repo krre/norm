@@ -7,10 +7,6 @@ Function::Function(const std::string& name) : m_name(name) {
 
 }
 
-std::string Function::description() const {
-    return "Function";
-}
-
 void Function::setBlock(BlockExpression* block) {
     m_block = block;
     addChild(block);

@@ -11,7 +11,6 @@ public:
     AssignStatement();
 
     Code code() const override { return Code::AssignStatement; }
-    std::string description() const override;
 
     void setIdentifier(Identifier* identifier);
     Identifier* identifier() const { return m_identifier; }

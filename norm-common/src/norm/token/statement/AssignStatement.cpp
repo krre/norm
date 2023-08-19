@@ -8,10 +8,6 @@ AssignStatement::AssignStatement() {
 
 }
 
-std::string AssignStatement::description() const {
-    return "Assign statement";
-}
-
 void AssignStatement::setIdentifier(Identifier* identifier) {
     m_identifier = identifier;
     addChild(identifier);

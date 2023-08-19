@@ -29,7 +29,6 @@ public:
     virtual ~Token();
 
     virtual Code code() const = 0;
-    virtual std::string description() const = 0;
 
     Id id() const { return m_id; }
     void setId(Id id) { m_id = id; }

@@ -10,8 +10,4 @@ void OperatorExpression::addExpression(Expression* expression) {
     addChild(expression);
 }
 
-std::string SumOperator::description() const {
-    return "Sum operator";
-}
-
 }

@@ -11,7 +11,6 @@ public:
     Function() = default;
 
     Code code() const override { return Code::Function; }
-    std::string description() const override;
 
     void setBlock(BlockExpression* block);
     BlockExpression* block() const { return m_block; }

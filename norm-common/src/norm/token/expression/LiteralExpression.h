@@ -28,7 +28,6 @@ public:
     IntegerLiteral() = default;
 
     Code code() const override { return Code::IntegerLiteral; }
-    std::string description() const override { return "Integer literal"; }
 };
 
 }

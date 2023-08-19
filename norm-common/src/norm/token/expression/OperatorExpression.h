@@ -15,7 +15,6 @@ public:
     SumOperator() {}
 
     Code code() const override { return Code::SumOperator; }
-    std::string description() const override;
 };
 
 }

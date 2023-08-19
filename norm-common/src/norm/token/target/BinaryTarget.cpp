@@ -8,8 +8,4 @@ BinaryTarget::BinaryTarget(const std::string& name) : Target(name) {
     addChild(m_main);
 }
 
-std::string BinaryTarget::description() const {
-    return "Binary target";
-}
-
 }
