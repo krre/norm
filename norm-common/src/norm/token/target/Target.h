@@ -12,6 +12,7 @@ public:
     Target() = default;
 
     const std::string& name() const { return m_name; }
+    void setName(const std::string& name) { m_name = name; }
 
     void addItem(Item* item);
 
