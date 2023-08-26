@@ -11,6 +11,8 @@ public:
     Identifier() = default;
 
     const std::string& name() const { return m_name; }
+    void setName(const std::string& name) { m_name = name; }
+
     Type* type() const { return m_type; }
 
     Code code() const override { return Code::Identifier; }
