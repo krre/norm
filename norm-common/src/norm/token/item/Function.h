@@ -12,6 +12,9 @@ public:
 
     Code code() const override { return Code::Function; }
 
+    const std::string& name() const { return m_name; }
+    void setName(const std::string& name) { m_name = name; }
+
     void setBlock(BlockExpression* block);
     BlockExpression* block() const { return m_block; }
 
