@@ -12,15 +12,17 @@
 namespace Norm {
 
 FileReader::FileReader() {
-    addTokenCreator<BinaryTarget>(Token::Code::BinaryTarget);
-    addTokenCreator<LibraryTarget>(Token::Code::LibraryTarget);
-    addTokenCreator<Function>(Token::Code::Function);
-    addTokenCreator<AssignStatement>(Token::Code::AssignStatement);
-    addTokenCreator<BlockExpression>(Token::Code::BlockExpression);
-    addTokenCreator<IntegerLiteral>(Token::Code::IntegerLiteral);
-    addTokenCreator<SumOperator>(Token::Code::SumOperator);
-    addTokenCreator<Integer>(Token::Code::Integer);
-    addTokenCreator<Identifier>(Token::Code::Identifier);
+    using C = Token::Code;
+
+    addTokenCreator<BinaryTarget>(C::BinaryTarget);
+    addTokenCreator<LibraryTarget>(C::LibraryTarget);
+    addTokenCreator<Function>(C::Function);
+    addTokenCreator<AssignStatement>(C::AssignStatement);
+    addTokenCreator<BlockExpression>(C::BlockExpression);
+    addTokenCreator<IntegerLiteral>(C::IntegerLiteral);
+    addTokenCreator<SumOperator>(C::SumOperator);
+    addTokenCreator<Integer>(C::Integer);
+    addTokenCreator<Identifier>(C::Identifier);
 }
 
 Token* FileReader::read(const std::string& filePath) {
