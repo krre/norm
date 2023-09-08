@@ -21,4 +21,3 @@ add_library(common STATIC
 set_target_properties(common PROPERTIES OUTPUT_NAME norm)
 
 target_include_directories(common PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-message(${CMAKE_CURRENT_SOURCE_DIR})
