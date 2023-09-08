@@ -7,7 +7,7 @@ namespace Norm {
 
 class Token {
 public:
-    enum class Code : int8_t {
+    enum class Code : uint8_t {
         BinaryTarget =      0x00,
         LibraryTarget =     0x01,
         Function =          0x02,
