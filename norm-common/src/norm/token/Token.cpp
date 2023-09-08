@@ -1,6 +1,7 @@
 #include "Token.h"
 #include <fstream>
 #include <assert.h>
+#include <algorithm>
 
 namespace Norm {
 
