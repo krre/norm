@@ -1,7 +1,7 @@
 use clap::{Parser, Subcommand};
 
 #[derive(Parser, Debug)]
-#[command(about = "Norm managing CLI", version, long_about = None)]
+#[command(about = "Norm managing CLI tool", version, long_about = None)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,
