@@ -9,11 +9,12 @@ struct Cli {
 
 #[derive(Subcommand, Debug)]
 enum Commands {
+    /// Create new project
     Create {
         #[arg(required = true)]
         name: String,
     },
-
+    /// Build project
     Build,
 }
 
