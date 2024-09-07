@@ -3,6 +3,8 @@ name = "norm"
 version = "0.1.0"
 authors = ["Vladimir Zarypov <krre31@gmail.com>"]
 edition = "2021"
+description = "Experimental visual programming language"
+repository = "https://github.com/krre/norm"
 
 [lib]
 name = "norm"
