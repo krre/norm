@@ -1,2 +1,2 @@
 # Norm
-Experimental visual programming language.
+Structured programming language.
