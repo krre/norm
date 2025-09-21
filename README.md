@@ -1,2 +1,2 @@
 # Norm
-Structured programming language.
+Multidimensional programming language.
