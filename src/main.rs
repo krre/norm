@@ -1,7 +1,7 @@
 use clap::{Args, Parser, Subcommand};
 
 #[derive(Parser, Debug)]
-#[command(about = "Norm managing CLI tool", version, long_about = None)]
+#[command(about = "Command-line interface (CLI) for managing Norm code", version, long_about = None)]
 struct Cli {
     #[command(subcommand)]
     command: Commands,

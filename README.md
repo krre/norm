@@ -1,2 +1,2 @@
 # Norm
-Multidimensional programming language.
+Command-line interface (CLI) for managing Norm code.
