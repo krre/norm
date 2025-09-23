@@ -1,4 +1,5 @@
 use clap::{Args, Parser, Subcommand};
+use norm::project;
 
 #[derive(Parser, Debug)]
 #[command(about = "Command-line interface (CLI) for managing Norm code", version, long_about = None)]
@@ -33,23 +34,15 @@ struct Target {
     lib: bool,
 }
 
-fn create_application(name: String) {
-    println!("Create application `{name}`");
-}
-
-fn create_library(name: String) {
-    println!("Create library `{name}`");
-}
-
 fn main() {
     let cli = Cli::parse();
 
     match cli.command {
         Commands::Create { name, target } => {
             if target.lib {
-                create_library(name);
+                project::library::create(&name);
             } else {
-                create_application(name);
+                project::application::create(&name);
             }
         }
         Commands::Build => {
