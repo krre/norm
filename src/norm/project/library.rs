@@ -1,3 +1,4 @@
-pub fn create(name: &str) {
+pub fn create(name: &str) -> Result<(), String> {
     println!("Create library `{name}`");
+    Ok(())
 }

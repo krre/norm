@@ -40,9 +40,9 @@ pub fn route() -> Result<(), String> {
     match cli.command {
         Commands::Create { name, target } => {
             if target.lib {
-                project::library::create(&name);
+                project::library::create(&name)?;
             } else {
-                project::application::create(&name);
+                project::application::create(&name)?;
             }
         }
         Commands::Build => {
