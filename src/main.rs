@@ -25,16 +25,16 @@ enum Commands {
 #[derive(Args, Debug)]
 #[group(multiple = false)]
 struct Target {
-    /// Binary target
+    /// Application target
     #[arg(long)]
-    bin: bool,
+    app: bool,
     /// Library target
     #[arg(long)]
     lib: bool,
 }
 
-fn create_binary(name: String) {
-    println!("Create binary `{name}`");
+fn create_application(name: String) {
+    println!("Create application `{name}`");
 }
 
 fn create_library(name: String) {
@@ -49,7 +49,7 @@ fn main() {
             if target.lib {
                 create_library(name);
             } else {
-                create_binary(name);
+                create_application(name);
             }
         }
         Commands::Build => {
