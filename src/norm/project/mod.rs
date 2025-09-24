@@ -10,7 +10,7 @@ pub enum Target {
 
 pub fn create(name: &str, target: Target) -> Result<(), String> {
     if let Err(err) = create_project(name, target) {
-        return Err(format!("Cann't to created project: {}", err.kind()));
+        return Err(format!("Cann't to create project: {}", err.kind()));
     }
 
     Ok(())
