@@ -46,7 +46,7 @@ pub fn route() -> Result<(), String> {
             }
         }
         Commands::Build => {
-            println!("Building");
+            project::build()?;
         }
     }
 

@@ -3,6 +3,9 @@ use std::fs;
 pub mod application;
 pub mod library;
 
+pub const APP_FILE: &'static str = "app.norm";
+pub const LIB_FILE: &'static str = "lib.norm";
+
 pub enum Target {
     Application,
     Library,
@@ -10,10 +13,28 @@ pub enum Target {
 
 pub fn create(name: &str, target: Target) -> Result<(), String> {
     if let Err(err) = create_project(name, target) {
-        return Err(format!("Cann't to create project: {}", err.kind()));
+        return Err(format!("Can't to created project: {}", err.kind()));
     }
 
     Ok(())
+}
+
+pub fn build() -> Result<(), String> {
+    if let Ok(res) = fs::exists(APP_FILE)
+        && res
+    {
+        build_project(APP_FILE);
+        return Ok(());
+    }
+
+    if let Ok(res) = fs::exists(LIB_FILE)
+        && res
+    {
+        build_project(LIB_FILE);
+        return Ok(());
+    }
+
+    Err(String::from("Directory is not Norm project"))
 }
 
 fn create_project(name: &str, target: Target) -> std::io::Result<()> {
@@ -29,4 +50,9 @@ fn create_project(name: &str, target: Target) -> std::io::Result<()> {
     }
 
     Ok(())
+}
+
+fn build_project(file_name: &str) {
+    println!("Build file {}", file_name);
+    fs::create_dir("build").ok();
 }
