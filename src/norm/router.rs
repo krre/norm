@@ -21,6 +21,8 @@ enum Commands {
     },
     /// Build project
     Build,
+    /// Run application
+    Run,
 }
 
 #[derive(Args, Debug)]
@@ -47,6 +49,9 @@ pub fn route() -> Result<(), String> {
         }
         Commands::Build => {
             project::build()?;
+        }
+        Commands::Run => {
+            project::run()?;
         }
     }
 

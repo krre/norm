@@ -37,6 +37,17 @@ pub fn build() -> Result<(), String> {
     Err(String::from("Directory is not Norm project"))
 }
 
+pub fn run() -> Result<(), String> {
+    if let Ok(res) = fs::exists(APP_FILE)
+        && res
+    {
+        println!("Application runned...");
+        return Ok(());
+    }
+
+    Err(String::from("Directory is not Norm application project"))
+}
+
 fn create_project(name: &str, target: Target) -> std::io::Result<()> {
     fs::create_dir(name)?;
 
