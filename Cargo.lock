@@ -108,7 +108,12 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "clap_derive",
+ "normlib",
 ]
+
+[[package]]
+name = "normlib"
+version = "0.1.0"
 
 [[package]]
 name = "proc-macro2"
