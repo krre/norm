@@ -1,5 +1,3 @@
-use std::fs;
-
 use normlib::project::Target;
 
 pub fn create(name: &str, target: Target) -> Result<(), String> {
@@ -19,12 +17,9 @@ pub fn build() -> Result<(), String> {
 }
 
 pub fn run() -> Result<(), String> {
-    if let Ok(res) = fs::exists(normlib::project::APP_FILE)
-        && res
-    {
-        println!("Application runned...");
-        return Ok(());
+    if let Err(err) = normlib::project::run() {
+        return Err(format!("Can't run project: {}", err.kind()));
     }
 
-    Err(String::from("Directory is not Norm application project"))
+    Ok(())
 }
