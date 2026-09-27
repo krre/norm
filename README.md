@@ -1,2 +1,2 @@
 # Norm
-Command-line interface (CLI) for managing Norm code.
+3D programming language for WebAssembly target.
