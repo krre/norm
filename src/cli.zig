@@ -4,11 +4,16 @@ const std = @import("std");
 const fatal = std.process.fatal;
 
 const usage =
-    \\Usage: norm [options] [file]
+    \\Usage: norm [options] [command]
     \\
     \\Options:
     \\  -h, --help     Print help and exit
     \\  -v, --version  Print version information and exit
+    \\
+    \\Commands:
+    \\  init           Init new project
+    \\  build          Build project
+    \\  run            Run application
     \\
 ;
 
