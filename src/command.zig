@@ -1,8 +1,8 @@
+const project = @import("project.zig");
 const std = @import("std");
 
 pub fn init(io: std.Io, name: []const u8) !void {
-    _ = io;
-    std.log.info("init {s}", .{name});
+    try project.create(io, name);
 }
 
 pub fn build() !void {
