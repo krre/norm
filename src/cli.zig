@@ -1,9 +1,10 @@
-const std = @import("std");
 const build_options = @import("build_options");
+const command = @import("command.zig");
+const std = @import("std");
 const fatal = std.process.fatal;
 
 const usage =
-    \\Usage: norm [options]
+    \\Usage: norm [options] [file]
     \\
     \\Options:
     \\  -h, --help     Print help and exit
@@ -35,5 +36,21 @@ pub fn run(io: std.Io, args: []const []const u8) !void {
         } else {
             fatal("unrecognized option: '{s}'", .{arg});
         }
+    }
+
+    const command_name = arg;
+
+    if (std.mem.eql(u8, command_name, "init")) {
+        if (args.len < 2) {
+            fatal("project name is empty", .{});
+        } else {
+            try command.init(io, args[1]);
+        }
+    } else if (std.mem.eql(u8, command_name, "build")) {
+        try command.build();
+    } else if (std.mem.eql(u8, command_name, "run")) {
+        try command.run();
+    } else {
+        fatal("unknown command: '{s}'", .{command_name});
     }
 }
