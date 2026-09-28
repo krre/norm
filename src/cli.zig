@@ -31,7 +31,7 @@ pub fn run(io: std.Io, args: []const []const u8) !void {
 
     if (std.mem.startsWith(u8, arg, "-")) {
         if (std.mem.eql(u8, arg, "-v") or std.mem.eql(u8, arg, "--version")) {
-            try writer.interface.print("{s}", .{build_options.version});
+            try writer.interface.print("{s}\n", .{build_options.version});
             try writer.interface.flush();
             return;
         } else if (std.mem.eql(u8, arg, "-h") or std.mem.eql(u8, arg, "--help")) {
